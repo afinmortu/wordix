@@ -10,3 +10,4 @@ Univesidad Nacional del Comahue
 
 #Integrantes del grupo
 - **Mauricio Ferreyra** - legajo 53722 - mail: afimortu@gmail.com - Github: afinmortu
+- **Francisco Insua** - legajo 3013 - mail: franinsua7@gmail.com - Github: frankitobienslow
