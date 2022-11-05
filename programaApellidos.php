@@ -197,7 +197,7 @@ function opcion5Menu($coleccionDePartidas)
     //Calcular el porcentaje de victorias
     if ($resumenJugador["partidas"] == 0)
     {
-        echo "No hay partidas"          //para no dividir por cero ;)
+        echo "No hay partidas";          //para no dividir por cero ;)
     }else
     {
         $porcentajeVictorias = ($resumenJugador["victorias"] * 100) / $resumenJugador["partidas"] ;
@@ -239,10 +239,14 @@ function opcion5Menu($coleccionDePartidas)
 /**************************************/
 
 //Declaración de variables:
-// $partidasGuardadas[]     array con la coleccion de partidas precargadas
+// array $partidasGuardadas[]       array con la coleccion de partidas precargadas
+// $opcion                          menu de opciones
+
 
 //Inicialización de variables:
 $partidasGuardadas = cargarPartidas();      //Carga el array con las partidas guardadas
+$opcion = 1;
+
 
 //Proceso:
 
@@ -251,7 +255,7 @@ $partidasGuardadas = cargarPartidas();      //Carga el array con las partidas gu
 //imprimirResultado($partida);
 
 
-
+do{
 echo "\n*****MENU DE OPCIONES*****\n
     1) Jugar al Wordix con una palabra elegida\n
     2) Jugar al Wordix con una palabra aleatoria\n
@@ -262,44 +266,53 @@ echo "\n*****MENU DE OPCIONES*****\n
     7) Agregar una palabra de 5 letras a Wordix\n
     8) Salir\n";
 
-do {
+//do {
+    echo "Ingrese un número de menú: ";
     $opcion = trim(fgets(STDIN));
 
     switch ($opcion) {
         case 1:
             //completar qué secuencia de pasos ejecutar si el usuario elige la opción 1
-
+            echo "Presione una tecla para ir al menu...";
+            $opcion = trim(fgets(STDIN));
             break;
         case 2:
             //completar qué secuencia de pasos ejecutar si el usuario elige la opción 2
-
+            echo "Presione una tecla para ir al menu...";
+            $opcion = trim(fgets(STDIN));
             break;
         case 3:
             opcion3Menu($partidasGuardadas);
+            echo "Presione una tecla para ir al menu...";
+            $opcion = trim(fgets(STDIN));
             break;
         case 4:
             //completar qué secuencia de pasos ejecutar si el usuario elige la opción 3
-
+            echo "Presione una tecla para ir al menu...";
+            $opcion = trim(fgets(STDIN));
             break;
         case 5:
             opcion5Menu($partidasGuardadas);
-
+            echo "Presione una tecla para ir al menu...";
+            $opcion = trim(fgets(STDIN));
             break;
         case 6:
             //completar qué secuencia de pasos ejecutar si el usuario elige la opción 3
-
+            echo "Presione una tecla para ir al menu...";
+            $opcion = trim(fgets(STDIN));
             break;
         case 7:
             //completar qué secuencia de pasos ejecutar si el usuario elige la opción 3
-
+            echo "Presione una tecla para ir al menu...";
+            $opcion = trim(fgets(STDIN));
             break;
         case 8:
             //completar qué secuencia de pasos ejecutar si el usuario elige la opción 3
-
+            echo "Gracias por jugar wordix...";
             break;
     }
-} while (
-    $opcion != 1 &&
+} while ($opcion != 8);
+ /*   $opcion != 1 &&
     $opcion != 2 &&
     $opcion != 3 &&
     $opcion != 4 &&
@@ -307,4 +320,4 @@ do {
     $opcion != 6 && 
     $opcion != 7 && 
     $opcion != 8
-);
+);*/
