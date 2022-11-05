@@ -71,18 +71,18 @@ function cargarPartidas ()
 function resumenPartida($numPartida, $colPartidas)
 {
 
-    echo "***********************************";
-    echo "Partida Wordix ". $numPartida. ": palabra ". $colPartidas[$numPartida-1]["palabraWordix"];
-    echo "Jugador: ". $colPartidas[$numPartida-1]["jugador"];
-    echo "Puntaje: ". $colPartidas[$numPartida-1]["puntaje"]. " puntos.";
+    echo "***********************************"."\n";
+    echo "Partida Wordix ". $numPartida. ": palabra ". $colPartidas[$numPartida-1]["palabraWordix"]."\n";
+    echo "Jugador: ". $colPartidas[$numPartida-1]["jugador"]."\n";
+    echo "Puntaje: ". $colPartidas[$numPartida-1]["puntaje"]. " puntos."."\n";
     if ($colPartidas[$numPartida-1]["puntaje"] = 0) 
     {
-        echo "No adivinó la palabra.";
+        echo "No adivinó la palabra."."\n";
     }else
     {
-        echo "Adivinó la palabra en ". $colPartidas[$numPartida-1]["intentos"];
+        echo "Adivinó la palabra en ". $colPartidas[$numPartida-1]["intentos"]."\n";
     }
-    echo "***********************************";
+    echo "***********************************"."\n";
 }
 
 /**
@@ -114,7 +114,7 @@ function opcion3Menu($colecPartidas)
  * llama a la funcion estadisticaJugador() para mostrar la partida en pantalla
  * Recibe el array con las partidas guardadas
  * no tiene retorno ;)
- * @param array $colecPartidas
+ * @param array $coleccionDePartidas
  */
 function opcion5Menu($coleccionDePartidas)
 {
@@ -124,31 +124,42 @@ function opcion5Menu($coleccionDePartidas)
     int $cantPart
     int $porcentajeVictorias
     */
-    $resumenJugador["jugador"=> "","partidas"=> "","puntaje" =>0,"victorias" =>0,"intento1" =>0,"intento2" =>0
-    ,"intento3" =>0,"intento4" =>0,"intento5" =>0,"intento6" =>0];
+    $resumenJugador = [];
+    $resumenJugador["jugador"] = "";
+    $resumenJugador["partidas"] = 0;
+    $resumenJugador["puntaje"] = 0;
+    $resumenJugador["victorias"] = 0;
+    $resumenJugador["intento1"] = 0;
+    $resumenJugador["intento2"] = 0;
+    $resumenJugador["intento3"] = 0;
+    $resumenJugador["intento4"] = 0;
+    $resumenJugador["intento5"] = 0;
+    $resumenJugador["intento6"] = 0;
     $porcentajeVictorias = 0;
     $esJugador = false;
     $i = 0;
     $cantPart = count($coleccionDePartidas);
     echo "Ingrese el nombre del jugador: ";
-    $resumenJugador["jugador"] = trim(fgetc(STDIN));
-    $$resumenJugador["jugador"] = strtolower($resumenJugador["jugador"]);
+    $resumenJugador["jugador"] = trim(fgets(STDIN));
+    $resumenJugador["jugador"] = strtolower($resumenJugador["jugador"]);
     do
     {
         $i = 0;
         do
         {
-            $esJugador = ($resumenJugador["jugador"] == $coleccionDePartidas[$i]["jugador"]) ? true : false;
-            $i++; 
-            
-        }while (!$esJugador && $i<=$cantPart)
+            if ($resumenJugador["jugador"] == $coleccionDePartidas[$i]["jugador"])
+            {
+                $esJugador = true;
+            }
+            $i++;
+        }while (!$esJugador && $i<$cantPart);
         if (!$esJugador)
         {
             echo "El jugador no existe, ingrese otro nombre: ";
-            $resumenJugador["jugador"] = trim(fgetc(STDIN));
+            $resumenJugador["jugador"] = trim(fgets(STDIN));
             $resumenJugador["jugador"] = strtolower($resumenJugador["jugador"]);
         }
-    }while ($esJugador);
+    }while (!$esJugador);
     for ($i=0; $i < $cantPart ; $i++) 
     { 
         if ($resumenJugador["jugador"] == $coleccionDePartidas[$i]["jugador"])
@@ -184,21 +195,28 @@ function opcion5Menu($coleccionDePartidas)
         }
     }
     //Calcular el porcentaje de victorias
-    $porcentajeVictorias = ($resumenJugador["victorias"] * 100) / $resumenJugador["partidas"] ;
-    echo "**************************************************";
-    echo "Jugador: ". $resumenJugador["jugador"];
-    echo "Partidas: ".$resumenJugador["partidas"] ;
-    echo "Puntaje Total: ". $resumenJugador["puntaje"];
-    echo "Victorias: ". $resumenJugador["victorias"] ;
-    echo "Porcentaje Victorias: ". $porcentajeVictorias;
-    echo "Adivinadas:";
-    echo "      Intento 1: ". $resumenJugador["intento1"];
-    echo "      Intento 2: ". $resumenJugador["intento2"];
-    echo "      Intento 3: ". $resumenJugador["intento3"];
-    echo "      Intento 4: ". $resumenJugador["intento4"];
-    echo "      Intento 5: ". $resumenJugador["intento5"];
-    echo "      Intento 6: ". $resumenJugador["intento6"];
-    echo "**************************************************";
+    if ($resumenJugador["partidas"] == 0)
+    {
+        echo "No hay partidas"          //para no dividir por cero ;)
+    }else
+    {
+        $porcentajeVictorias = ($resumenJugador["victorias"] * 100) / $resumenJugador["partidas"] ;
+    }
+    
+    echo "**************************************************"."\n";
+    echo "Jugador: ". $resumenJugador["jugador"]."\n";
+    echo "Partidas: ".$resumenJugador["partidas"] ."\n";
+    echo "Puntaje Total: ". $resumenJugador["puntaje"]."\n";
+    echo "Victorias: ". $resumenJugador["victorias"] ."\n";
+    echo "Porcentaje Victorias: ". $porcentajeVictorias."\n";
+    echo "Adivinadas:"."\n";
+    echo "      Intento 1: ". $resumenJugador["intento1"]."\n";
+    echo "      Intento 2: ". $resumenJugador["intento2"]."\n";
+    echo "      Intento 3: ". $resumenJugador["intento3"]."\n";
+    echo "      Intento 4: ". $resumenJugador["intento4"]."\n";
+    echo "      Intento 5: ". $resumenJugador["intento5"]."\n";
+    echo "      Intento 6: ". $resumenJugador["intento6"]."\n";
+    echo "**************************************************"."\n";
 
 
 }
@@ -221,14 +239,14 @@ function opcion5Menu($coleccionDePartidas)
 /**************************************/
 
 //Declaración de variables:
-
+// $partidasGuardadas[]     array con la coleccion de partidas precargadas
 
 //Inicialización de variables:
-
+$partidasGuardadas = cargarPartidas();      //Carga el array con las partidas guardadas
 
 //Proceso:
 
-$partida = jugarWordix("MELON", strtolower("MaJo"));
+//$partida = jugarWordix("MELON", strtolower("MaJo"));
 //print_r($partida);
 //imprimirResultado($partida);
 
@@ -257,14 +275,14 @@ do {
 
             break;
         case 3:
-            opcion3Menu($coleccionPartidas);
+            opcion3Menu($partidasGuardadas);
             break;
         case 4:
             //completar qué secuencia de pasos ejecutar si el usuario elige la opción 3
 
             break;
         case 5:
-            opcion5Menu($coleccionPartidas);
+            opcion5Menu($partidasGuardadas);
 
             break;
         case 6:
