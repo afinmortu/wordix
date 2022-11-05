@@ -60,6 +60,51 @@ function cargarPartidas ()
     return $coleccionPartidas;
 }
 //----------------------------------------------------------------------------------------------------------
+/**
+ * Recibe un numero de partida y muestra en pantalla los datos de la partida,
+ * Recibe el array con las partidas guardadas
+ * Recibe un numero de partida existente
+ *  no tiene retorno :)
+ * @param int $numPartida
+ * @param array $colPartidas[]
+ */
+function resumenPartida($numPartida, $colPartidas)
+{
+
+    echo "***********************************";
+    echo "Partida Wordix ". $numPartida. ": palabra ". $colPartidas[$numPartida-1]["palabraWordix"];
+    echo "Jugador: ". $colPartidas[$numPartida-1]["jugador"];
+    echo "Puntaje: ". $colPartidas[$numPartida-1]["puntaje"]. " puntos.";
+    if ($colPartidas[$numPartida-1]["puntaje"] = 0) 
+    {
+        echo "No adivinó la palabra.";
+    }else
+    {
+        echo "Adivinó la palabra en ". $colPartidas[$numPartida-1]["intentos"];
+    }
+    echo "***********************************";
+}
+
+/**
+ * Opcion 3 del menu: Mostrar partida
+ * Solicita un numero de partida, verifica que la partida exista y sino vuelve a solicitarlo
+ * llama a la funcion solicitarNumeroEntre()
+ * llama a la funcion resumenPartida() para mostrar la partida en pantalla
+ * Recibe el array con las partidas guardadas
+ * no tiene retorno ;)
+ * @param array $colecPartidas[] 
+ */
+function opcion3Menu($colecPartidas)
+{
+    /*
+    int $cantPartidas   //cantidad de partidas guardadas
+    int numPart         //Numero de la partida a mostrar
+    */
+    $cantPartidas = count($colecPartidas);
+    echo "Ingrese un número de partida: ";
+    $numPart = solicitarNumeroEntre(0, $cantPartidas+1);
+    resumenPartida($numPart, $colecPartidas);
+}
 
 
 /* ... COMPLETAR ... */
