@@ -33,6 +33,34 @@ function cargarColeccionPalabras()
 
     return ($coleccionPalabras);
 }
+/**
+ * Inicia una estructura de datos con ejemplos de partidas
+ * No recibe parametros formales y devuelve un array con las partidas
+ * @return array
+ */
+//-----------------------------------------------------------------------------------------------
+function cargarPartidas ()
+{
+    /*
+    string $coleccionPartidas[0]["palabraWordix"]
+    string $coleccionPartidas[0]["jugador"]
+    int $coleccionPartidas[0]["intentos"]
+    int $coleccionPartidas[0]["puntaje"]
+    */
+    $coleccionPartidas[0] = ["palabraWordix"=>"QUESO","jugador"=>"majo","intentos"=>0,"puntaje"=>0];
+    $coleccionPartidas[1] = ["palabraWordix"=>"CASAS","jugador"=>"tito","intentos"=>0,"puntaje"=>0];
+    $coleccionPartidas[2] = ["palabraWordix"=>"QUESO","jugador"=>"pepe","intentos"=>0,"puntaje"=>0];
+    $coleccionPartidas[3] = ["palabraWordix"=>"TINTO","jugador"=>"atilio","intentos"=>0,"puntaje"=>0];
+    $coleccionPartidas[4] = ["palabraWordix"=>"MUJER","jugador"=>"chino21","intentos"=>0,"puntaje"=>0];
+    $coleccionPartidas[5] = ["palabraWordix"=>"GOTAS","jugador"=>"marx","intentos"=>0,"puntaje"=>0];
+    $coleccionPartidas[6] = ["palabraWordix"=>"REINO","jugador"=>"chino21","intentos"=>0,"puntaje"=>0];
+    $coleccionPartidas[7] = ["palabraWordix"=>"GANAR","jugador"=>"pinky","intentos"=>0,"puntaje"=>0];
+    $coleccionPartidas[8] = ["palabraWordix"=>"MELON","jugador"=>"atilio","intentos"=>0,"puntaje"=>0];
+    $coleccionPartidas[9] = ["palabraWordix"=>"VERDE","jugador"=>"atilio","intentos"=>0,"puntaje"=>0];
+    return $coleccionPartidas;
+}
+//----------------------------------------------------------------------------------------------------------
+
 
 /* ... COMPLETAR ... */
 
