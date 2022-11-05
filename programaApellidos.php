@@ -106,6 +106,111 @@ function opcion3Menu($colecPartidas)
     resumenPartida($numPart, $colecPartidas);
 }
 
+//***************************************************************************** */
+
+/**
+ * Opcion 5 del menu: Mostrar estadistica del jugador
+ * Solicita un nombre de jugador y muestra en pantalla la estadistica de las jugadas
+ * llama a la funcion estadisticaJugador() para mostrar la partida en pantalla
+ * Recibe el array con las partidas guardadas
+ * no tiene retorno ;)
+ * @param array $colecPartidas
+ */
+function opcion5Menu($coleccionDePartidas)
+{
+    /*
+    boolean $esJugador
+    int $i, $j
+    int $cantPart
+    int $porcentajeVictorias
+    */
+    $resumenJugador["jugador"=> "","partidas"=> "","puntaje" =>0,"victorias" =>0,"intento1" =>0,"intento2" =>0
+    ,"intento3" =>0,"intento4" =>0,"intento5" =>0,"intento6" =>0];
+    $porcentajeVictorias = 0;
+    $esJugador = false;
+    $i = 0;
+    $cantPart = count($coleccionDePartidas);
+    echo "Ingrese el nombre del jugador: ";
+    $resumenJugador["jugador"] = trim(fgetc(STDIN));
+    $$resumenJugador["jugador"] = strtolower($resumenJugador["jugador"]);
+    do
+    {
+        $i = 0;
+        do
+        {
+            $esJugador = ($resumenJugador["jugador"] == $coleccionDePartidas[$i]["jugador"]) ? true : false;
+            $i++; 
+            
+        }while (!$esJugador && $i<=$cantPart)
+        if (!$esJugador)
+        {
+            echo "El jugador no existe, ingrese otro nombre: ";
+            $resumenJugador["jugador"] = trim(fgetc(STDIN));
+            $resumenJugador["jugador"] = strtolower($resumenJugador["jugador"]);
+        }
+    }while ($esJugador);
+    for ($i=0; $i < $cantPart ; $i++) 
+    { 
+        if ($resumenJugador["jugador"] == $coleccionDePartidas[$i]["jugador"])
+        {
+            $resumenJugador["partidas"]++;
+            $resumenJugador["puntaje"] = $resumenJugador["puntaje"] + $coleccionDePartidas[$i]["puntaje"];
+            switch ($coleccionDePartidas[$i]["intentos"]) {
+                case 1:
+                    $resumenJugador["victorias"] ++;
+                    $resumenJugador["intento1"]++;
+                    break;
+                case 2:
+                    $resumenJugador["victorias"] ++;
+                    $resumenJugador["intento2"]++;
+                    break;
+                case 3:
+                    $resumenJugador["victorias"] ++;
+                    $resumenJugador["intento3"]++;
+                    break; 
+                case 4:
+                    $resumenJugador["victorias"] ++;
+                    $resumenJugador["intento4"]++;
+                    break;                
+                case 5:
+                    $resumenJugador["victorias"] ++;
+                    $resumenJugador["intento5"]++;
+                    break;
+                case 6:
+                    $resumenJugador["victorias"] ++;
+                    $resumenJugador["intent6"]++;
+                    break;           
+            }
+        }
+    }
+    //Calcular el porcentaje de victorias
+    $porcentajeVictorias = ($resumenJugador["victorias"] * 100) / $resumenJugador["partidas"] ;
+    echo "**************************************************";
+    echo "Jugador: ". $resumenJugador["jugador"];
+    echo "Partidas: ".$resumenJugador["partidas"] ;
+    echo "Puntaje Total: ". $resumenJugador["puntaje"];
+    echo "Victorias: ". $resumenJugador["victorias"] ;
+    echo "Porcentaje Victorias: ". $porcentajeVictorias;
+    echo "Adivinadas:";
+    echo "      Intento 1: ". $resumenJugador["intento1"];
+    echo "      Intento 2: ". $resumenJugador["intento2"];
+    echo "      Intento 3: ". $resumenJugador["intento3"];
+    echo "      Intento 4: ". $resumenJugador["intento4"];
+    echo "      Intento 5: ". $resumenJugador["intento5"];
+    echo "      Intento 6: ". $resumenJugador["intento6"];
+    echo "**************************************************";
+
+
+}
+
+//***************************************************************** */
+
+
+
+
+
+
+
 
 /* ... COMPLETAR ... */
 
@@ -152,15 +257,14 @@ do {
 
             break;
         case 3:
-            //completar qué secuencia de pasos ejecutar si el usuario elige la opción 3
-
+            opcion3Menu($coleccionPartidas);
             break;
         case 4:
             //completar qué secuencia de pasos ejecutar si el usuario elige la opción 3
 
             break;
         case 5:
-            //completar qué secuencia de pasos ejecutar si el usuario elige la opción 3
+            opcion5Menu($coleccionPartidas);
 
             break;
         case 6:
