@@ -268,6 +268,29 @@ function seleccionarOpcion()
     $opcionMenu = solicitarNumeroEntre(1,8);
     return $opcionMenu;
 }
+
+function agregarPalabra(array $coleccionPalabras): array
+{
+    /*String $palabra;
+    array $arrPalabra;
+    int $cantElem;
+    int $i;*/
+    $i = 0;
+    do {
+        $palabra = trim(fgets(STDIN));
+        $arrPalabra = explode("", $palabra); //Convertimos la palabra en una arreglo, con un elemento por cada letra
+        $cantElem = count($arrPalabra); //Contamos la cantidad de elementos del arreglo
+    } while ($cantElem != 5); //Chequeamos si tiene 5, de no ser asi, se la solicita nuevamente.
+
+    //Una vez sabemos que tiene 5 letras, las convertimos en mayuscula
+    for ($i; $i > $cantElem; $i++) {
+        $arrPalabra[$i] = strtoupper($arrPalabra[$i]);
+    }
+    //Agregamos la palabra a la coleccion
+    $coleccionPalabras . array_push($arrPalabra);
+    print_r($coleccionPalabras);
+    return $coleccionPalabras;
+}
 /****************************************************************** */
 
 
