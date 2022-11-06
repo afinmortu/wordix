@@ -48,15 +48,15 @@ function cargarPartidas ()
     int $coleccionPartidas[0]["puntaje"]
     */
     $coleccionPartidas[0] = ["palabraWordix"=>"QUESO","jugador"=>"majo","intentos"=>0,"puntaje"=>0];
-    $coleccionPartidas[1] = ["palabraWordix"=>"CASAS","jugador"=>"tito","intentos"=>0,"puntaje"=>0];
-    $coleccionPartidas[2] = ["palabraWordix"=>"QUESO","jugador"=>"pepe","intentos"=>0,"puntaje"=>0];
-    $coleccionPartidas[3] = ["palabraWordix"=>"TINTO","jugador"=>"atilio","intentos"=>0,"puntaje"=>0];
-    $coleccionPartidas[4] = ["palabraWordix"=>"MUJER","jugador"=>"chino21","intentos"=>0,"puntaje"=>0];
-    $coleccionPartidas[5] = ["palabraWordix"=>"GOTAS","jugador"=>"marx","intentos"=>0,"puntaje"=>0];
+    $coleccionPartidas[1] = ["palabraWordix"=>"CASAS","jugador"=>"tito","intentos"=>5,"puntaje"=>10];
+    $coleccionPartidas[2] = ["palabraWordix"=>"QUESO","jugador"=>"pepe","intentos"=>4,"puntaje"=>16];
+    $coleccionPartidas[3] = ["palabraWordix"=>"TINTO","jugador"=>"atilio","intentos"=>3,"puntaje"=>20];
+    $coleccionPartidas[4] = ["palabraWordix"=>"MUJER","jugador"=>"chino21","intentos"=>5,"puntaje"=>10];
+    $coleccionPartidas[5] = ["palabraWordix"=>"GOTAS","jugador"=>"marx","intentos"=>2,"puntaje"=>25];
     $coleccionPartidas[6] = ["palabraWordix"=>"REINO","jugador"=>"chino21","intentos"=>0,"puntaje"=>0];
-    $coleccionPartidas[7] = ["palabraWordix"=>"GANAR","jugador"=>"pinky","intentos"=>0,"puntaje"=>0];
-    $coleccionPartidas[8] = ["palabraWordix"=>"MELON","jugador"=>"atilio","intentos"=>0,"puntaje"=>0];
-    $coleccionPartidas[9] = ["palabraWordix"=>"VERDE","jugador"=>"atilio","intentos"=>0,"puntaje"=>0];
+    $coleccionPartidas[7] = ["palabraWordix"=>"GANAR","jugador"=>"pinky","intentos"=>4,"puntaje"=>16];
+    $coleccionPartidas[8] = ["palabraWordix"=>"MELON","jugador"=>"atilio","intentos"=>5,"puntaje"=>10];
+    $coleccionPartidas[9] = ["palabraWordix"=>"VERDE","jugador"=>"atilio","intentos"=>2,"puntaje"=>25];
     return $coleccionPartidas;
 }
 //----------------------------------------------------------------------------------------------------------
@@ -84,6 +84,32 @@ function resumenPartida($numPartida, $colPartidas)
     }
     echo "***********************************"."\n";
 }
+//************************************************************************************** */
+
+/**
+ * Muestra en pantalla un listado de los jugadores que realizaron partidas, asi
+ * elegir un nombre de la lista para ver sus partidas
+ * @param array $colDePartidas
+ */
+function listadoJugadores($colDePartidas)
+{
+    /*array string $listaJugadores[]
+      int $i 
+      array $partidas
+      */  
+    $listaJugadores = [];
+    $i = 0;
+    echo "       Lista de jugadores guardados: \n";
+    foreach ($colDePartidas as $i => $partidas) 
+    {
+        echo "     ".$partidas["jugador"]."\n";
+        //$listaJugadores[$i] = $partidas["jugador"];
+    }
+}
+//************************************************************************************* */
+
+
+
 
 /**
  * Opcion 3 del menu: Mostrar partida
@@ -202,28 +228,47 @@ function opcion5Menu($coleccionDePartidas)
     {
         $porcentajeVictorias = ($resumenJugador["victorias"] * 100) / $resumenJugador["partidas"] ;
     }
-    
-    echo "**************************************************"."\n";
-    echo "Jugador: ". $resumenJugador["jugador"]."\n";
-    echo "Partidas: ".$resumenJugador["partidas"] ."\n";
-    echo "Puntaje Total: ". $resumenJugador["puntaje"]."\n";
-    echo "Victorias: ". $resumenJugador["victorias"] ."\n";
-    echo "Porcentaje Victorias: ". $porcentajeVictorias."\n";
-    echo "Adivinadas:"."\n";
-    echo "      Intento 1: ". $resumenJugador["intento1"]."\n";
-    echo "      Intento 2: ". $resumenJugador["intento2"]."\n";
-    echo "      Intento 3: ". $resumenJugador["intento3"]."\n";
-    echo "      Intento 4: ". $resumenJugador["intento4"]."\n";
-    echo "      Intento 5: ". $resumenJugador["intento5"]."\n";
-    echo "      Intento 6: ". $resumenJugador["intento6"]."\n";
-    echo "**************************************************"."\n";
-
-
+    echo "**************************************************
+    Jugador: ". $resumenJugador["jugador"]."
+    Partidas: ".$resumenJugador["partidas"]."
+    Puntaje Total: ". $resumenJugador["puntaje"]."
+    Victorias: ". $resumenJugador["victorias"] ."
+    Porcentaje Victorias: ". $porcentajeVictorias."
+    Adivinadas:
+          Intento 1: ". $resumenJugador["intento1"]."
+          Intento 2: ". $resumenJugador["intento2"]."
+          Intento 3: ". $resumenJugador["intento3"]."
+          Intento 4: ". $resumenJugador["intento4"]."
+          Intento 5: ". $resumenJugador["intento5"]."
+          Intento 6: ". $resumenJugador["intento6"]."\n
+    *********************************************************\n";
 }
 
 //***************************************************************** */
+/**
+ * Visualiza el menu de opciones en la pantalla, le solicita al usuario una opcion
+ * valida, si la opcion no es valida vuelve a pedirla. Retorna el numero de la opcion
+ * No tiene parametros formales
+ * @return int
+ */
+function seleccionarOpcion()
+{
+    //int $opcionMenu
 
-
+    echo "\n*****MENU DE OPCIONES*****\n
+    1) Jugar al Wordix con una palabra elegida\n
+    2) Jugar al Wordix con una palabra aleatoria\n
+    3) Mostrar una partida\n
+    4) Mostrar la primer partida ganadora\n
+    5) Mostrar resumen de Jugador\n
+    6) Mostrar listado de partidas ordenadas por jugador y por palabra\n
+    7) Agregar una palabra de 5 letras a Wordix\n
+    8) Salir\n
+       Ingrese una opción del menú: ";
+    $opcionMenu = solicitarNumeroEntre(1,8);
+    return $opcionMenu;
+}
+/****************************************************************** */
 
 
 
@@ -256,20 +301,7 @@ $opcion = 1;
 
 
 do{
-echo "\n*****MENU DE OPCIONES*****\n
-    1) Jugar al Wordix con una palabra elegida\n
-    2) Jugar al Wordix con una palabra aleatoria\n
-    3) Mostrar una partida\n
-    4) Mostrar la primer partida ganadora\n
-    5) Mostrar resumen de Jugador\n
-    6) Mostrar listado de partidas ordenadas por jugador y por palabra\n
-    7) Agregar una palabra de 5 letras a Wordix\n
-    8) Salir\n";
-
-//do {
-    echo "Ingrese un número de menú: ";
-    $opcion = trim(fgets(STDIN));
-
+$opcion = seleccionarOpcion();
     switch ($opcion) {
         case 1:
             //completar qué secuencia de pasos ejecutar si el usuario elige la opción 1
@@ -282,6 +314,7 @@ echo "\n*****MENU DE OPCIONES*****\n
             $opcion = trim(fgets(STDIN));
             break;
         case 3:
+            //Mostrar una partida, pide el numero de partida
             opcion3Menu($partidasGuardadas);
             echo "Presione una tecla para ir al menu...";
             $opcion = trim(fgets(STDIN));
@@ -292,6 +325,8 @@ echo "\n*****MENU DE OPCIONES*****\n
             $opcion = trim(fgets(STDIN));
             break;
         case 5:
+            //Mostrar Resumen de jugador, muestra una lista de jugadores para elegir uno
+            listadoJugadores($partidasGuardadas);
             opcion5Menu($partidasGuardadas);
             echo "Presione una tecla para ir al menu...";
             $opcion = trim(fgets(STDIN));
@@ -309,15 +344,7 @@ echo "\n*****MENU DE OPCIONES*****\n
         case 8:
             //completar qué secuencia de pasos ejecutar si el usuario elige la opción 3
             echo "Gracias por jugar wordix...";
-            break;
+            break; 
     }
 } while ($opcion != 8);
- /*   $opcion != 1 &&
-    $opcion != 2 &&
-    $opcion != 3 &&
-    $opcion != 4 &&
-    $opcion != 5 && 
-    $opcion != 6 && 
-    $opcion != 7 && 
-    $opcion != 8
-);*/
+
