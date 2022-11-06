@@ -27,7 +27,9 @@ const ESTADO_LETRA_PERTENECE = "pertenece";
 /**************************************/
 
 /**
- *  ****COMPLETAR*****
+ *  Solicita un nuemro entre un margen determinado
+ * @param int $min, $max
+ * @return int //  ****COMPLETAR*****
  */
 function solicitarNumeroEntre($min, $max)
 {
@@ -42,7 +44,7 @@ function solicitarNumeroEntre($min, $max)
 
 /**
  * Escrbir un texto en color ROJO
- * @param string $texto)
+ * @param string $texto
  */
 function escribirRojo($texto)
 {
@@ -112,7 +114,8 @@ function escribirSegunEstado($texto, $estado)
 }
 
 /**
- * ****COMPLETAR*****
+ * Escribe un mensaje de bienvenida al jugador
+ * @param string $usuario //****COMPLETAR*****
  */
 function escribirMensajeBienvenida($usuario)
 {
@@ -125,8 +128,11 @@ function escribirMensajeBienvenida($usuario)
 
 
 /**
- * ****COMPLETAR*****
+ * Verifica que el dato ingresado sea una cadena de letras
+ * @pararm string $cadena
+ * @return boolean
  */
+
 function esPalabra($cadena)
 {
     //int $cantCaracteres, $i, boolean $esLetra
@@ -141,7 +147,8 @@ function esPalabra($cadena)
 }
 
 /**
- *  ****COMPLETAR*****
+ *  Verifica que el dato ingresado sea una cadena de 5 letras
+ *  @return string
  */
 function leerPalabra5Letras()
 {
