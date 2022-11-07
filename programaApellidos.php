@@ -403,13 +403,13 @@ $opcion = seleccionarOpcion();
         case 1:
             //Opcion 1: Jugar wordix
             //Se ejecuta la funcion opcion1y2 con la entrada true para que el jugador eliga la palabra y el retorno de esta, se agrega a $partidasGuardadas.
-            array_push($partidasGuardadas, opcion1y2Menu($partidasGuardadas, $coleccionPalabras, true));
+            array_push($partidasGuardadas, opcion1y2Menu($partidasGuardadas, $palabras, true));
             echo "\nPresione una tecla para ir al menu...";
             $opcion = trim(fgets(STDIN));
             break;
         case 2:
             //Se ejecuta la funcion opcion1y2 con la entrada false para que el numero de partida sea aleatorio y el retorno de esta, se agrega a $partidasGuardadas.
-            array_push($partidasGuardadas, opcion1y2Menu($partidasGuardadas, $coleccionPalabras, false));
+            array_push($partidasGuardadas, opcion1y2Menu($partidasGuardadas, $palabras, false));
             echo "\nPresione una tecla para ir al menu...";
             $opcion = trim(fgets(STDIN));
             break;
