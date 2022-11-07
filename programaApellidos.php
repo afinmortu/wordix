@@ -123,13 +123,13 @@ function opcion1Menu($partidasAnteriores, $palabrasWordix)
     string $jugadorActual
     String $palabraActual
     int $nroPalabraActual
-    int $cantPalabras
+    int $limite
     array $estadistica[]
     boolean $palabraUsada
     int $indice
     */
     $palabraUsada = false;
-    $cantPalabras = count($partidasAnteriores);
+    $limite = count($partidasAnteriores);
     echo "Ingrese jugador : ";
     $jugadorActual = trim(fgets(STDIN));
     //$jugadorActual = solicitarJugador();
@@ -143,7 +143,7 @@ function opcion1Menu($partidasAnteriores, $palabrasWordix)
             $palabraUsada = false;
             echo "La palabra ya la usaste jaJaja! ingresa otro numero: ";
         }
-        $nroPalabraActual = solicitarNumeroEntre(1,$cantPalabras+1);
+        $nroPalabraActual = solicitarNumeroEntre(1,$limite+1);
         $nroPalabraActual--;
         $palabraActual = $palabrasWordix[$nroPalabraActual];
         do
@@ -153,7 +153,7 @@ function opcion1Menu($partidasAnteriores, $palabrasWordix)
                     $palabraUsada = true;
                }
             $indice++;
-        }while($palabraUsada || $indice<$cantPalabras);
+        }while(!$palabraUsada && $indice<$limite);
     }while($palabraUsada);
     $estadistica = jugarWordix($palabraActual, $jugadorActual);
     array_push($partidasAnteriores, $estadistica);
@@ -178,7 +178,7 @@ function opcion3Menu($colecPartidas)
     */
     $cantPartidas = count($colecPartidas);
     echo "Ingrese un número de partida: ";
-    $numPart = (solicitarNumeroEntre(0, $cantPartidas)) ;
+    $numPart = (solicitarNumeroEntre(1, $cantPartidas)) ;
     resumenPartida($numPart, $colecPartidas);
 }
 
