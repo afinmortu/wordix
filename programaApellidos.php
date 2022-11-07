@@ -269,6 +269,8 @@ function seleccionarOpcion()
     return $opcionMenu;
 }
 
+/****************************************************************** */
+
 function agregarPalabra(array $coleccionPalabras): array
 {
     /*String $palabra;
@@ -293,9 +295,15 @@ function agregarPalabra(array $coleccionPalabras): array
 }
 /****************************************************************** */
 
+function solicitarJugador():string{
+    do{
+        echo "Ingrese el nombre del jugador";
+        $nombre=trim(fgets(STDIN));
+    }while(is_numeric($nombre[0]));//Si el primer caracter es numerico, lo pide de vuelta
+    return strtolower($nombre);//lo retorna en minusculas
+   }
 
-
-
+/****************************************************************** */
 
 
 /* ... COMPLETAR ... */
