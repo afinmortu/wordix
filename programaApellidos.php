@@ -178,7 +178,7 @@ function opcion3Menu($colecPartidas)
     */
     $cantPartidas = count($colecPartidas);
     echo "Ingrese un número de partida: ";
-    $numPart = solicitarNumeroEntre(0, $cantPartidas+1);
+    $numPart = (solicitarNumeroEntre(0, $cantPartidas+1)) - 1; //resta 1 para no desbordar el array
     resumenPartida($numPart, $colecPartidas);
 }
 
@@ -360,15 +360,15 @@ function solicitarJugador(): string
 /**************************************/
 
 //Declaración de variables:
-    array $partidasGuardadas[]          array con la coleccion de partidas precargadas
-    array $palabras[]                   array con las palabras wordix
-    int $opcion                             menu de opciones
+/*
+   array $partidasGuardadas[]          array con la coleccion de partidas precargadas
+   array $palabras[]                   array con las palabras wordix
+   int $opcion                             menu de opciones
 */
 
 //Inicialización de variables:
 $partidasGuardadas = cargarPartidas();      //Carga el array con las partidas guardadas
-$palabras = cargarColeccionPalabras();
-$opcion = 1;
+$palabras = cargarColeccionPalabras();      //Carga el array con las palabras guardadas para jugar
 
 
 //Proceso:
@@ -384,46 +384,46 @@ $opcion = seleccionarOpcion();
         case 1:
             //Opcion 1: Jugar wordix
             $partidasGuardadas = opcion1Menu($partidasGuardadas, $palabras);
-            echo "Presione una tecla para ir al menu...";
+            echo "\nPresione una tecla para ir al menu...";
             $opcion = trim(fgets(STDIN));
             break;
         case 2:
             //completar qué secuencia de pasos ejecutar si el usuario elige la opción 2
-            echo "Presione una tecla para ir al menu...";
+            echo "\nPresione una tecla para ir al menu...";
             $opcion = trim(fgets(STDIN));
             break;
         case 3:
             //Mostrar una partida, pide el numero de partida
             opcion3Menu($partidasGuardadas);
-            echo "Presione una tecla para ir al menu...";
+            echo "\nPresione una tecla para ir al menu...";
             $opcion = trim(fgets(STDIN));
             break;
         case 4:
             //completar qué secuencia de pasos ejecutar si el usuario elige la opción 3
-            echo "Presione una tecla para ir al menu...";
+            echo "\nPresione una tecla para ir al menu...";
             $opcion = trim(fgets(STDIN));
             break;
         case 5:
             //Mostrar Resumen de jugador, muestra una lista de jugadores para elegir uno
             listadoJugadores($partidasGuardadas);
             opcion5Menu($partidasGuardadas);
-            echo "Presione una tecla para ir al menu...";
+            echo "\nPresione una tecla para ir al menu...";
             $opcion = trim(fgets(STDIN));
             break;
         case 6:
             //completar qué secuencia de pasos ejecutar si el usuario elige la opción 3
-            echo "Presione una tecla para ir al menu...";
+            echo "\nPresione una tecla para ir al menu...";
             $opcion = trim(fgets(STDIN));
             break;
         case 7:
             //Se actualiza la coleccion de palabras con la palabra ingresada por el usuario
             $coleccionPalabras=agregarPalabra($coleccionPalabras);
-            echo "Presione una tecla para ir al menu...";
+            echo "\nPresione una tecla para ir al menu...";
             $opcion = trim(fgets(STDIN));
              break;
         case 8:
             //completar qué secuencia de pasos ejecutar si el usuario elige la opción 3
-            echo "Gracias por jugar wordix...";
+            echo "\nGracias por jugar wordix...";
             break; 
     }
 } while ($opcion != 8);
