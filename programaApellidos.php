@@ -107,10 +107,60 @@ function listadoJugadores($colDePartidas)
     }
 }
 //************************************************************************************* */
-
-
-
-
+//************************************************************************************* */
+/**
+ * Opcion 1 del menu: Jugar Wordix
+ * Solicita al usuario un nombre de jugador y un numero de palabra para buscar en la lista
+ * de palabras wordix, verifica que el jugador no repita la palabra.
+ * luego de la partida guarda los datos estadisticos en la estructura partidas
+ * @param array $partidasAnteriores
+ * @param array $palabrasWordix
+ * @return array
+ */
+function opcion1Menu($partidasAnteriores, $palabrasWordix)
+{
+    /*
+    string $jugadorActual
+    String $palabraActual
+    int $nroPalabraActual
+    int $cantPalabras
+    array $estadistica[]
+    boolean $palabraUsada
+    int $indice
+    */
+    $palabraUsada = false;
+    $cantPalabras = count($partidasAnteriores);
+    echo "Ingrese jugador : ";
+    $jugadorActual = trim(fgets(STDIN));
+    //$jugadorActual = solicitarJugador();
+    do
+    {
+        $indice = 0;
+        if (!$palabraUsada)
+        {
+            echo "Ingrese un numero de palabra para jugar!: ";
+        }else{    
+            $palabraUsada = false;
+            echo "La palabra ya la usaste jaJaja! ingresa otro numero: ";
+        }
+        $nroPalabraActual = solicitarNumeroEntre(1,$cantPalabras+1);
+        $nroPalabraActual--;
+        $palabraActual = $palabrasWordix[$nroPalabraActual];
+        do
+        {
+            if(($partidasAnteriores[$indice]["jugador"] == $jugadorActual) && ($partidasAnteriores[$indice]["palabraWordix"] == $palabraActual))
+               {
+                    $palabraUsada = true;
+               }
+            $indice++;
+        }while($palabraUsada || $indice<$cantPalabras);
+    }while($palabraUsada);
+    $estadistica = jugarWordix($palabraActual, $jugadorActual);
+    array_push($partidasAnteriores, $estadistica);
+    return $partidasAnteriores;
+}
+//*********************************************************************************************************
+//*********************************************************************************************************
 /**
  * Opcion 3 del menu: Mostrar partida
  * Solicita un numero de partida, verifica que la partida exista y sino vuelve a solicitarlo
@@ -315,12 +365,14 @@ function solicitarJugador():string{
 /**************************************/
 
 //Declaración de variables:
-// array $partidasGuardadas[]       array con la coleccion de partidas precargadas
-// $opcion                          menu de opciones
-
+    array $partidasGuardadas[]          array con la coleccion de partidas precargadas
+    array $palabras[]                   array con las palabras wordix
+    int $opcion                             menu de opciones
+*/
 
 //Inicialización de variables:
 $partidasGuardadas = cargarPartidas();      //Carga el array con las partidas guardadas
+$palabras = cargarColeccionPalabras();
 $opcion = 1;
 
 
@@ -335,7 +387,8 @@ do{
 $opcion = seleccionarOpcion();
     switch ($opcion) {
         case 1:
-            //completar qué secuencia de pasos ejecutar si el usuario elige la opción 1
+            //Opcion 1: Jugar wordix
+            $partidasGuardadas = opcion1Menu($partidasGuardadas, $palabras);
             echo "Presione una tecla para ir al menu...";
             $opcion = trim(fgets(STDIN));
             break;
