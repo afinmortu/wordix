@@ -107,12 +107,14 @@ function listadoJugadores($colDePartidas)
     }
 }
 //************************************************************************************* */
-//************************************************************************************* */
+
 /**
- * Opcion 1 del menu: Jugar Wordix
- * Solicita al usuario un nombre de jugador y un numero de palabra para buscar en la lista
- * de palabras wordix, verifica que el jugador no repita la palabra.
- * luego de la partida guarda los datos estadisticos en la estructura partidas
+ * Opcion 1 y 2 del menu: Jugar Wordix
+ * Solicita al usuario un nombre de jugador 
+ * Si es llamado con $opcion=true, solicita al usuario un numero de palabra para buscar en la lista
+ * Si es llamado con $opcion=false, se genera un numero de palabra aleatorio entre 1 y la cantidad de palabras de la lista
+ * Se verifica que el jugador no repita la palabra.
+ * retorna las estadisticas de la partida ejecutada
  * @param array $partidasAnteriores
  * @param boolean $opcion
  * @param array $palabrasWordix
@@ -321,29 +323,37 @@ function seleccionarOpcion()
     return $opcionMenu;
 }
 
-/****************************************************************** */
 
-function ingresarPalabra(): string
-{
-  //string $palabra;
-  do {
-    $palabra = trim(fgets(STDIN));
-  } while (strlen($palabra) != 5); //Nos aseguramos de que tenga 5 letras
-  return $palabra;
-}
-
-/****************************************************************** */
 /**
-* Dada la coleccion de palabras y una palabra, la funcion agrega una palabra a el array coleccionDePalbras
-* y retorna la colección modificada al agregarse la nueva palabra
-* @param array $coleccionDePalabras
-* @return array
+* Dada la coleccion de palabras, la funcion pide y agrega una palabra al array $palabras
+* y retorna la palabra en mayusculas
+* @param array $coleccionPalabras
+* @return string
 */
 
-function agregarPalabra(array $coleccionDePalabras): array
-{   //Agregamos la palabra a la coleccion
-  array_push($coleccionDePalabras, strtoupper(ingresarPalabra()));
-  return $coleccionDePalabras;
+function agregarPalabra($coleccionPalabras): string
+{
+  /*string $palabra;
+  int $indice=0;
+  boolean $palabraExiste=true;
+  int $cantPalabras;*/
+  $indice = 0;
+  $palabraExiste = false;
+  $cantPalabras = count($coleccionPalabras);
+  do {
+    echo "Ingrese una palabra de 5 letras:";
+    $palabra = trim(fgets(STDIN));
+  } while (strlen($palabra) != 5); //Nos aseguramos de que tenga 5 letras.
+  do {
+    if ($coleccionPalabras[$indice] == $palabra) { //Chequeamos que la palabra no este en la coleccion de palabras original
+      $palabraExiste = true;
+    } else {
+      $palabraExiste = false;
+      $indice++;
+    }
+  } while (!$palabraExiste && $indice > $cantPalabras);
+  //Retornamos la palabra en mayusculas
+  return strtoupper($palabra);
 }
 /****************************************************************** */
 /**
@@ -362,10 +372,6 @@ function solicitarJugador(): string
 }
 
 /****************************************************************** */
-
-
-/* ... COMPLETAR ... */
-
 
 
 /**************************************/
@@ -402,7 +408,6 @@ $opcion = seleccionarOpcion();
             $opcion = trim(fgets(STDIN));
             break;
         case 2:
-            //completar qué secuencia de pasos ejecutar si el usuario elige la opción 2
             //Se ejecuta la funcion opcion1y2 con la entrada false para que el numero de partida sea aleatorio y el retorno de esta, se agrega a $partidasGuardadas.
             array_push($partidasGuardadas, opcion1y2Menu($partidasGuardadas, $coleccionPalabras, false));
             echo "\nPresione una tecla para ir al menu...";
@@ -432,8 +437,8 @@ $opcion = seleccionarOpcion();
             $opcion = trim(fgets(STDIN));
             break;
         case 7:
-            //Se actualiza la coleccion de palabras con la palabra ingresada por el usuario
-            $palabras=agregarPalabra($palabras);
+             //Agregamos una nueva palabra a la coleccion.
+              array_push($palabras, (agregarPalabra($palabras))); 
             echo "\nPresione una tecla para ir al menu...";
             $opcion = trim(fgets(STDIN));
              break;
