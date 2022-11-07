@@ -340,16 +340,16 @@ function obtenerPuntajeWordix($intento, $palabraEncontrada)  /* ****COMPLETAR***
 	    {
 	    if (preg_match('/[AEIOU]/i',chr($i)))
                 {
-	            $vocales = $vocales + 1;
+	            $vocales = $vocales + 1 * $val;
 	            } else if (preg_match('/[A-M]/i',chr($i)))
 		            {
-	                 $consonantesMenores = $consonantesMenores + 2;
+	                 $consonantesMenores = $consonantesMenores + 2 * $val;
 		            }
                     else{
-                        $consonantesMayores = $consonantesMayores + 3;
+                        $consonantesMayores = $consonantesMayores + 3 * $val;
                     }					
 	    }
-    $puntaje = 8 - $intento + $vocales + $consonantesMayores + $consonantesMenores;
+    $puntaje = 7 - $intento + $vocales + $consonantesMayores + $consonantesMenores;
         
     return $puntaje;
 }
