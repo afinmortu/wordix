@@ -178,7 +178,7 @@ function opcion3Menu($colecPartidas)
     */
     $cantPartidas = count($colecPartidas);
     echo "Ingrese un número de partida: ";
-    $numPart = (solicitarNumeroEntre(0, $cantPartidas+1)) - 1; //resta 1 para no desbordar el array
+    $numPart = (solicitarNumeroEntre(0, $cantPartidas)) ;
     resumenPartida($numPart, $colecPartidas);
 }
 
