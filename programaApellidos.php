@@ -321,37 +321,32 @@ function seleccionarOpcion()
 
 /****************************************************************** */
 
-function agregarPalabra(array $coleccionPalabras): array
+function ingresarPalabra(): string
 {
-    /*String $palabra;
-    array $arrPalabra;
-    int $cantElem;
-    int $i;*/
-    $i = 0;
-    do {
-        $palabra = trim(fgets(STDIN));
-        $arrPalabra = explode("", $palabra); //Convertimos la palabra en una arreglo, con un elemento por cada letra
-        $cantElem = count($arrPalabra); //Contamos la cantidad de elementos del arreglo
-    } while ($cantElem != 5); //Chequeamos si tiene 5, de no ser asi, se la solicita nuevamente.
+  //string $palabra;
+  do {
+    $palabra = trim(fgets(STDIN));
+  } while (strlen($palabra) != 5); //Nos aseguramos de que tenga 5 letras
+  return $palabra;
+}
 
-    //Una vez sabemos que tiene 5 letras, las convertimos en mayuscula
-    for ($i; $i > $cantElem; $i++) {
-        $arrPalabra[$i] = strtoupper($arrPalabra[$i]);
-    }
-    //Agregamos la palabra a la coleccion
-    $coleccionPalabras . array_push($arrPalabra);
-    print_r($coleccionPalabras);
-    return $coleccionPalabras;
+/****************************************************************** */
+
+function agregarPalabra(array $coleccionDePalabras): array
+{   //Agregamos la palabra a la coleccion
+  array_push($coleccionDePalabras, strtoupper(ingresarPalabra()));
+  return $coleccionDePalabras;
 }
 /****************************************************************** */
 
-function solicitarJugador():string{
-    do{
-        echo "Ingrese el nombre del jugador";
-        $nombre=trim(fgets(STDIN));
-    }while(is_numeric($nombre[0]));//Si el primer caracter es numerico, lo pide de vuelta
-    return strtolower($nombre);//lo retorna en minusculas
-   }
+function solicitarJugador(): string
+{
+  do {
+    echo "Ingrese el nombre del jugador";
+    $nombre = trim(fgets(STDIN));
+  } while (is_numeric($nombre[0])); //Si el primer caracter es numerico, lo pide de vuelta
+  return strtolower($nombre); //lo retorna en minusculas
+}
 
 /****************************************************************** */
 
@@ -421,10 +416,11 @@ $opcion = seleccionarOpcion();
             $opcion = trim(fgets(STDIN));
             break;
         case 7:
-            //completar qué secuencia de pasos ejecutar si el usuario elige la opción 3
+            //Se actualiza la coleccion de palabras con la palabra ingresada por el usuario
+            $coleccionPalabras=agregarPalabra($coleccionPalabras);
             echo "Presione una tecla para ir al menu...";
             $opcion = trim(fgets(STDIN));
-            break;
+             break;
         case 8:
             //completar qué secuencia de pasos ejecutar si el usuario elige la opción 3
             echo "Gracias por jugar wordix...";
