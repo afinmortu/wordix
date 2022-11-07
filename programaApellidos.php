@@ -331,6 +331,12 @@ function ingresarPalabra(): string
 }
 
 /****************************************************************** */
+/**
+* Dada la coleccion de palabras y una palabra, la funcion agrega una palabra a el array coleccionDePalbras
+* y retorna la colección modificada al agregarse la nueva palabra
+* @param array $coleccionDePalabras
+* @return array
+*/
 
 function agregarPalabra(array $coleccionDePalabras): array
 {   //Agregamos la palabra a la coleccion
@@ -338,7 +344,12 @@ function agregarPalabra(array $coleccionDePalabras): array
   return $coleccionDePalabras;
 }
 /****************************************************************** */
-
+/**
+* Esta función solicita al usuario el nombre de un jugador y retorna el nombre en minúsculas. La función se asegura de
+* que el nombre del jugador no comience con un número 
+* No tiene parametros formales
+* @return string
+*/
 function solicitarJugador(): string
 {
   do {
