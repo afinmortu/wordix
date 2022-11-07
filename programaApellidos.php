@@ -123,16 +123,18 @@ function opcion1Menu($partidasAnteriores, $palabrasWordix)
     string $jugadorActual
     String $palabraActual
     int $nroPalabraActual
-    int $limite
+    int $umbralPartidas
+    int $umbralPalabras
     array $estadistica[]
     boolean $palabraUsada
     int $indice
     */
     $palabraUsada = false;
-    $limite = count($partidasAnteriores);
-    echo "Ingrese jugador : ";
-    $jugadorActual = trim(fgets(STDIN));
-    //$jugadorActual = solicitarJugador();
+    $umbralPartidas = count($partidasAnteriores);
+    $umbralPalabras = count($palabrasWordix);
+    //echo "Ingrese jugador : ";
+    //$jugadorActual = trim(fgets(STDIN));
+    $jugadorActual = solicitarJugador();
     do
     {
         $indice = 0;
@@ -143,7 +145,7 @@ function opcion1Menu($partidasAnteriores, $palabrasWordix)
             $palabraUsada = false;
             echo "La palabra ya la usaste jaJaja! ingresa otro numero: ";
         }
-        $nroPalabraActual = solicitarNumeroEntre(1,$limite+1);
+        $nroPalabraActual = solicitarNumeroEntre(1,$umbralPalabras);
         $nroPalabraActual--;
         $palabraActual = $palabrasWordix[$nroPalabraActual];
         do
@@ -153,7 +155,7 @@ function opcion1Menu($partidasAnteriores, $palabrasWordix)
                     $palabraUsada = true;
                }
             $indice++;
-        }while(!$palabraUsada && $indice<$limite);
+        }while(!$palabraUsada && $indice<$umbralPartidas);
     }while($palabraUsada);
     $estadistica = jugarWordix($palabraActual, $jugadorActual);
     array_push($partidasAnteriores, $estadistica);
@@ -353,7 +355,7 @@ function agregarPalabra(array $coleccionDePalabras): array
 function solicitarJugador(): string
 {
   do {
-    echo "Ingrese el nombre del jugador";
+    echo "Ingrese el nombre del jugador:  ";
     $nombre = trim(fgets(STDIN));
   } while (is_numeric($nombre[0])); //Si el primer caracter es numerico, lo pide de vuelta
   return strtolower($nombre); //lo retorna en minusculas
@@ -428,7 +430,7 @@ $opcion = seleccionarOpcion();
             break;
         case 7:
             //Se actualiza la coleccion de palabras con la palabra ingresada por el usuario
-            $coleccionPalabras=agregarPalabra($coleccionPalabras);
+            $palabras=agregarPalabra($palabras);
             echo "\nPresione una tecla para ir al menu...";
             $opcion = trim(fgets(STDIN));
              break;
