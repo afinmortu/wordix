@@ -326,14 +326,32 @@ function esIntentoGanado($estructuraPalabraIntento)
     return $ganado;
 }
 
-/**
- * ****COMPLETAR***** documentación de la intefaz
+/**Calcula puntaje de partida
+ * @param int $intento, $palabraCalc
+ * @return int
  */
-function obtenerPuntajeWordix()  /* ****COMPLETAR***** parámetros formales necesarios */
+function obtenerPuntajeWordix($intento, $palabraEncontrada)  /* ****COMPLETAR***** parámetros formales necesarios */
 {
-
-    /* ****COMPLETAR***** cuerpo de la función*/
-    return 0;
+    /* int $puntaje*/
+    $vocales = 0;
+    $consonantesMenores = 0;
+    $consonantesMayores = 0;
+    foreach (count_chars($palabraEncontrada, 1) as $i => $val) 
+	    {
+	    if (preg_match('/[AEIOU]/i',chr($i)))
+                {
+	            $vocales = $vocales + 1;
+	            } else if (preg_match('/[A-M]/i',chr($i)))
+		            {
+	                 $consonantesMenores = $consonantesMenores + 2;
+		            }
+                    else{
+                        $consonantesMayores = $consonantesMayores + 3;
+                    }					
+	    }
+    $puntaje = 8 - $intento + $vocales + $consonantesMayores + $consonantesMenores;
+        
+    return $puntaje;
 }
 
 /**
