@@ -114,52 +114,52 @@ function listadoJugadores($colDePartidas)
  * de palabras wordix, verifica que el jugador no repita la palabra.
  * luego de la partida guarda los datos estadisticos en la estructura partidas
  * @param array $partidasAnteriores
+ * @param boolean $opcion
  * @param array $palabrasWordix
  * @return array
  */
-function opcion1Menu($partidasAnteriores, $palabrasWordix)
+function opcion1y2Menu($partidasAnteriores, $palabrasWordix, $opcion)
 {
-    /*
+  /*
     string $jugadorActual
     String $palabraActual
     int $nroPalabraActual
-    int $umbralPartidas
-    int $umbralPalabras
-    array $estadistica[]
+    int $limite
     boolean $palabraUsada
     int $indice
     */
-    $palabraUsada = false;
-    $umbralPartidas = count($partidasAnteriores);
-    $umbralPalabras = count($palabrasWordix);
-    //echo "Ingrese jugador : ";
-    //$jugadorActual = trim(fgets(STDIN));
-    $jugadorActual = solicitarJugador();
-    do
+  $palabraUsada = false;
+  $limite = count($partidasAnteriores);
+  $cantPalabras = count($palabrasWordix);
+  $jugadorActual = solicitarJugador();
+  $indice = 0;
+  do {
+
+    if ($opcion) //Si el modulo fue instanciado con $opcion=true, entonces el jugador elige la palabra...
     {
-        $indice = 0;
-        if (!$palabraUsada)
-        {
-            echo "Ingrese un numero de palabra para jugar!: ";
-        }else{    
-            $palabraUsada = false;
-            echo "La palabra ya la usaste jaJaja! ingresa otro numero: ";
-        }
-        $nroPalabraActual = solicitarNumeroEntre(1,$umbralPalabras);
-        $nroPalabraActual--;
-        $palabraActual = $palabrasWordix[$nroPalabraActual];
-        do
-        {
-            if(($partidasAnteriores[$indice]["jugador"] == $jugadorActual) && ($partidasAnteriores[$indice]["palabraWordix"] == $palabraActual))
-               {
-                    $palabraUsada = true;
-               }
-            $indice++;
-        }while(!$palabraUsada && $indice<$umbralPartidas);
-    }while($palabraUsada);
-    $estadistica = jugarWordix($palabraActual, $jugadorActual);
-    array_push($partidasAnteriores, $estadistica);
-    return $partidasAnteriores;
+      echo "Ingrese un numero de palabra para jugar!: ";
+      $nroPalabraActual = solicitarNumeroEntre(1, $cantPalabras);
+    } else {    //Si el modulo fue instanciado con $opcion=false, entonces nroPalabra es un numero entre 0 y la cantidad de palabras totales...
+      $nroPalabraActual = rand(1, $cantPalabras);
+    }
+
+    //Una vez almacenado el valor del nroPalabra, se le asigna esta a la variable string $palabraActual
+    $palabraActual = $palabrasWordix[$nroPalabraActual - 1];
+
+    do { //Buscamos si el jugador ya jugo con la palabra elegida, recorriendo el arreglo hasta que encuentre la palabra usada, si no la encontro, $palabraUsada se mantiene false.
+      if (($partidasAnteriores[$indice]["jugador"] == $jugadorActual) && ($partidasAnteriores[$indice]["palabraWordix"] == $palabraActual)) {
+        echo $partidasAnteriores[$indice]["jugador"];
+        echo "putito";
+        $palabraUsada = true;
+      } else {
+        $palabraUsada = false;
+        $indice++;
+      }
+    } while (!$palabraUsada && $indice < $limite); //El bucle do se ejecutara siempre que la palabra elegida no haya sido encontrada y mientras que $indice sea menor a $limite
+    echo "Ya jugaste esta palabra.";
+  } while ($palabraUsada); //El bucle do se ejecutara siempre que la palabra elegida haya sido usada
+
+  return jugarWordix($palabraActual, $jugadorActual);
 }
 //*********************************************************************************************************
 //*********************************************************************************************************
@@ -396,12 +396,15 @@ $opcion = seleccionarOpcion();
     switch ($opcion) {
         case 1:
             //Opcion 1: Jugar wordix
-            $partidasGuardadas = opcion1Menu($partidasGuardadas, $palabras);
+            //Se ejecuta la funcion opcion1y2 con la entrada true para que el jugador eliga la palabra y el retorno de esta, se agrega a $partidasGuardadas.
+            array_push($partidasGuardadas, opcion1y2Menu($partidasGuardadas, $coleccionPalabras, true));
             echo "\nPresione una tecla para ir al menu...";
             $opcion = trim(fgets(STDIN));
             break;
         case 2:
             //completar qué secuencia de pasos ejecutar si el usuario elige la opción 2
+            //Se ejecuta la funcion opcion1y2 con la entrada false para que el numero de partida sea aleatorio y el retorno de esta, se agrega a $partidasGuardadas.
+            array_push($partidasGuardadas, opcion1y2Menu($partidasGuardadas, $coleccionPalabras, false));
             echo "\nPresione una tecla para ir al menu...";
             $opcion = trim(fgets(STDIN));
             break;
