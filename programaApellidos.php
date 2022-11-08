@@ -237,37 +237,39 @@ function opcion5Menu($coleccionDePartidas)
         {
             echo "El jugador no existe, ingrese otro nombre: ";
             $resumenJugadoA;
-        if ($resumenJugador["jugador"] == $coleccionDePartidas[$i]["jugador"])
-        {
-            $resumenJugador["partidas"]++;
-            $resumenJugador["puntaje"] = $resumenJugador["puntaje"] + $coleccionDePartidas[$i]["puntaje"];
-            switch ($coleccionDePartidas[$i]["intentos"]) {
-                case 1:
-                    $resumenJugador["victorias"] ++;
-                    $resumenJugador["intento1"]++;
-                    break;
-                case 2:
-                    $resumenJugador["victorias"] ++;
-                    $resumenJugador["intento2"]++;
-                    break;
-                case 3:
-                    $resumenJugador["victorias"] ++;
-                    $resumenJugador["intento3"]++;
-                    break; 
-                case 4:
-                    $resumenJugador["victorias"] ++;
-                    $resumenJugador["intento4"]++;
-                    break;                
-                case 5:
-                    $resumenJugador["victorias"] ++;
-                    $resumenJugador["intento5"]++;
-                    break;
-                case 6:
-                    $resumenJugador["victorias"] ++;
-                    $resumenJugador["intent6"]++;
-                    break;           
+            if ($resumenJugador["jugador"] == $coleccionDePartidas[$i]["jugador"])
+            {
+                $resumenJugador["partidas"]++;
+                $resumenJugador["puntaje"] = $resumenJugador["puntaje"] + $coleccionDePartidas[$i]["puntaje"];
+                switch ($coleccionDePartidas[$i]["intentos"]) 
+                {
+                    case 1:
+                        $resumenJugador["victorias"] ++;
+                        $resumenJugador["intento1"]++;
+                        break;
+                    case 2:
+                        $resumenJugador["victorias"] ++;
+                        $resumenJugador["intento2"]++;
+                        break;
+                    case 3:
+                        $resumenJugador["victorias"] ++;
+                        $resumenJugador["intento3"]++;
+                        break; 
+                    case 4:
+                        $resumenJugador["victorias"] ++;
+                        $resumenJugador["intento4"]++;
+                        break;                
+                    case 5:
+                        $resumenJugador["victorias"] ++;
+                        $resumenJugador["intento5"]++;
+                        break;
+                    case 6:
+                        $resumenJugador["victorias"] ++;
+                        $resumenJugador["intent6"]++;
+                        break;           
+                }
             }
-        }
+          }
     }
     //Calcular el porcentaje de victorias
     if ($resumenJugador["partidas"] == 0)
