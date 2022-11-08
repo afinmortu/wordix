@@ -151,7 +151,7 @@ function opcion1y2Menu($partidasAnteriores, $palabrasWordix, $opcion)
     do { //Buscamos si el jugador ya jugo con la palabra elegida, recorriendo el arreglo hasta que encuentre la palabra usada, si no la encontro, $palabraUsada se mantiene false.
       if (($partidasAnteriores[$indice]["jugador"] == $jugadorActual) && ($partidasAnteriores[$indice]["palabraWordix"] == $palabraActual)) {
         echo $partidasAnteriores[$indice]["jugador"];
-        echo " putito ";
+        echo "putito";
         $palabraUsada = true;
       } else {
         $palabraUsada = false;
@@ -388,11 +388,9 @@ function agregarPalabra($coleccionPalabras): string
   $indice = 0;
   $palabraExiste = false;
   $cantPalabras = count($coleccionPalabras);
+  
   do {
-    echo "Ingrese una palabra de 5 letras:";
-    $palabra = trim(fgets(STDIN));
-  } while (strlen($palabra) != 5); //Nos aseguramos de que tenga 5 letras.
-  do {
+    $palabra = leerPalabra5letras();
     if ($coleccionPalabras[$indice] == $palabra) { //Chequeamos que la palabra no este en la coleccion de palabras original
       $palabraExiste = true;
     } else {
