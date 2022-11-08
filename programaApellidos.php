@@ -151,7 +151,7 @@ function opcion1y2Menu($partidasAnteriores, $palabrasWordix, $opcion)
     do { //Buscamos si el jugador ya jugo con la palabra elegida, recorriendo el arreglo hasta que encuentre la palabra usada, si no la encontro, $palabraUsada se mantiene false.
       if (($partidasAnteriores[$indice]["jugador"] == $jugadorActual) && ($partidasAnteriores[$indice]["palabraWordix"] == $palabraActual)) {
         echo $partidasAnteriores[$indice]["jugador"];
-        echo "putito";
+        echo " putito ";
         $palabraUsada = true;
       } else {
         $palabraUsada = false;
