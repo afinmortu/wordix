@@ -186,6 +186,51 @@ function opcion3Menu($colecPartidas)
     resumenPartida($numPart, $colecPartidas);
 }
 
+/****************************************************************************** */
+/****************************************************************************** */
+/**
+ * Opcion 4 del menu: mostrar la primera partida ganadora de un jugador
+ * Solicita un nombre de jugador 
+* @param array $coleccionDePartidas
+ */
+function opcion4Menu($coleccionDePartidas)
+{
+  /*
+    string $jugador
+    Boolean $esJugador
+    int $i
+    int $cantPart
+  */
+  $esJugador = false;
+  $i = 0;
+  $cantPart = count($coleccionDePartidas);
+  $jugador = solicitarJugador();
+  //Primero se verifica si el jugador ingresado existe en la estructura de jugadas
+  do
+  {
+      $i = 0;
+      do
+      {
+          if ($jugador == $coleccionDePartidas[$i]["jugador"])
+          {
+              $esJugador = true;
+          }
+          $i++;
+      }while (!$esJugador && $i<$cantPart);
+      if (!$esJugador)
+      {
+          echo "El jugador no existe...";
+          $resumenJugador["jugador"] = solicitarJugador();
+      }
+  }while (!$esJugador);
+  //El jugador existe en la estructura de partidas
+  //la variable indice $i guarda el numero de la partida
+  //caso de no existir partida? o jugador?
+  resumenPartida($i, $coleccionDePartidas);
+}
+
+
+
 //***************************************************************************** */
 
 /**
@@ -220,6 +265,7 @@ function opcion5Menu($coleccionDePartidas)
     $i = 0;
     $cantPart = count($coleccionDePartidas);
     $resumenJugador["jugador"] = solicitarJugador();
+    //Primero se verifica si el jugador ingresado existe en la estructura de jugadas
     do
     {
         $i = 0;
@@ -237,6 +283,8 @@ function opcion5Menu($coleccionDePartidas)
             $resumenJugador["jugador"] = solicitarJugador();
         }
     }while (!$esJugador);
+    //el jugador existe en la lista de jugadas
+    //ahora realizamos la estadistica
     for ($i=0; $i < $cantPart ; $i++) 
     { 
         if ($resumenJugador["jugador"] == $coleccionDePartidas[$i]["jugador"])
@@ -420,7 +468,9 @@ $opcion = seleccionarOpcion();
             $opcion = trim(fgets(STDIN));
             break;
         case 4:
-            //completar qué secuencia de pasos ejecutar si el usuario elige la opción 3
+            //Mostrar la primera partida ganada por un jugador
+            listadoJugadores($partidasGuardadas);
+            opcion4Menu($partidasGuardadas);
             echo "\nPresione una tecla para ir al menu...";
             $opcion = trim(fgets(STDIN));
             break;
