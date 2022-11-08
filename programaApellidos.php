@@ -219,9 +219,7 @@ function opcion5Menu($coleccionDePartidas)
     $esJugador = false;
     $i = 0;
     $cantPart = count($coleccionDePartidas);
-    echo "Ingrese el nombre del jugador: ";
-    $resumenJugador["jugador"] = trim(fgets(STDIN));
-    $resumenJugador["jugador"] = strtolower($resumenJugador["jugador"]);
+    $resumenJugador["jugador"] = solicitarJugador();
     do
     {
         $i = 0;
@@ -235,6 +233,41 @@ function opcion5Menu($coleccionDePartidas)
         }while (!$esJugador && $i<$cantPart);
         if (!$esJugador)
         {
+            echo "El jugador no existe...";
+            $resumenJugador["jugador"] = solicitarJugador();
+        }
+    }while (!$esJugador);
+    for ($i=0; $i < $cantPart ; $i++) 
+    { 
+        if ($resumenJugador["jugador"] == $coleccionDePartidas[$i]["jugador"])
+        {
+            $resumenJugador["partidas"]++;
+            $resumenJugador["puntaje"] = $resumenJugador["puntaje"] + $coleccionDePartidas[$i]["puntaje"];
+            switch ($coleccionDePartidas[$i]["intentos"]) {
+                case 1:
+                    $resumenJugador["victorias"] ++;
+                    $resumenJugador["intento1"]++;
+                    break;
+                case 2:
+                    $resumenJugador["victorias"] ++;
+                    $resumenJugador["intento2"]++;
+                    break;
+                case 3:
+                    $resumenJugador["victorias"] ++;
+                    $resumenJugador["intento3"]++;
+                    break; 
+                case 4:
+                    $resumenJugador["victorias"] ++;
+                    $resumenJugador["intento4"]++;
+                    break;                
+                case 5:
+                    $resumenJugador["victorias"] ++;
+                    $resumenJugador["intento5"]++;
+                    break;
+                case 6:
+                    $resumenJugador["victorias"] ++;
+                    $resumenJugador["intent6"]++;
+                    break;           
             echo "El jugador no existe, ingrese otro nombre: ";
             $resumenJugadoA;
             if ($resumenJugador["jugador"] == $coleccionDePartidas[$i]["jugador"])
@@ -294,6 +327,7 @@ function opcion5Menu($coleccionDePartidas)
           Intento 6: ". $resumenJugador["intento6"]."\n
     *********************************************************\n";
 }                                                                  
+
 
 //***************************************************************** */
 /**
