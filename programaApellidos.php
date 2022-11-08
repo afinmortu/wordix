@@ -48,15 +48,15 @@ function cargarPartidas ()
     int $coleccionPartidas[0]["puntaje"]
     */
     $coleccionPartidas[0] = ["palabraWordix"=>"QUESO","jugador"=>"majo","intentos"=>0,"puntaje"=>0];
-    $coleccionPartidas[1] = ["palabraWordix"=>"CASAS","jugador"=>"tito","intentos"=>5,"puntaje"=>10];
-    $coleccionPartidas[2] = ["palabraWordix"=>"QUESO","jugador"=>"pepe","intentos"=>4,"puntaje"=>16];
-    $coleccionPartidas[3] = ["palabraWordix"=>"TINTO","jugador"=>"atilio","intentos"=>3,"puntaje"=>20];
-    $coleccionPartidas[4] = ["palabraWordix"=>"MUJER","jugador"=>"chino21","intentos"=>5,"puntaje"=>10];
-    $coleccionPartidas[5] = ["palabraWordix"=>"GOTAS","jugador"=>"marx","intentos"=>2,"puntaje"=>25];
+    $coleccionPartidas[1] = ["palabraWordix"=>"CASAS","jugador"=>"tito","intentos"=>5,"puntaje"=>12];
+    $coleccionPartidas[2] = ["palabraWordix"=>"QUESO","jugador"=>"pepe","intentos"=>4,"puntaje"=>12];
+    $coleccionPartidas[3] = ["palabraWordix"=>"TINTO","jugador"=>"atilio","intentos"=>3,"puntaje"=>15];
+    $coleccionPartidas[4] = ["palabraWordix"=>"MUJER","jugador"=>"chino21","intentos"=>5,"puntaje"=>17];
+    $coleccionPartidas[5] = ["palabraWordix"=>"GOTAS","jugador"=>"marx","intentos"=>2,"puntaje"=>15];
     $coleccionPartidas[6] = ["palabraWordix"=>"REINO","jugador"=>"chino21","intentos"=>0,"puntaje"=>0];
-    $coleccionPartidas[7] = ["palabraWordix"=>"GANAR","jugador"=>"pinky","intentos"=>4,"puntaje"=>16];
-    $coleccionPartidas[8] = ["palabraWordix"=>"MELON","jugador"=>"atilio","intentos"=>5,"puntaje"=>10];
-    $coleccionPartidas[9] = ["palabraWordix"=>"VERDE","jugador"=>"atilio","intentos"=>2,"puntaje"=>25];
+    $coleccionPartidas[7] = ["palabraWordix"=>"GANAR","jugador"=>"pinky","intentos"=>4,"puntaje"=>13];
+    $coleccionPartidas[8] = ["palabraWordix"=>"MELON","jugador"=>"atilio","intentos"=>5,"puntaje"=>11];
+    $coleccionPartidas[9] = ["palabraWordix"=>"VERDE","jugador"=>"atilio","intentos"=>2,"puntaje"=>15];
     return $coleccionPartidas;
 }
 //----------------------------------------------------------------------------------------------------------
@@ -236,12 +236,7 @@ function opcion5Menu($coleccionDePartidas)
         if (!$esJugador)
         {
             echo "El jugador no existe, ingrese otro nombre: ";
-            $resumenJugador["jugador"] = trim(fgets(STDIN));
-            $resumenJugador["jugador"] = strtolower($resumenJugador["jugador"]);
-        }
-    }while (!$esJugador);
-    for ($i=0; $i < $cantPart ; $i++) 
-    { 
+            $resumenJugadoA;
         if ($resumenJugador["jugador"] == $coleccionDePartidas[$i]["jugador"])
         {
             $resumenJugador["partidas"]++;
