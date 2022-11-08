@@ -291,7 +291,7 @@ function opcion5Menu($coleccionDePartidas)
           Intento 5: ". $resumenJugador["intento5"]."
           Intento 6: ". $resumenJugador["intento6"]."\n
     *********************************************************\n";
-}??
+}                                                                   ??
 
 //***************************************************************** */
 /**
