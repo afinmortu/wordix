@@ -269,10 +269,10 @@ function opcion5Menu($coleccionDePartidas)
                     $resumenJugador["victorias"] ++;
                     $resumenJugador["intent6"]++;
                     break;           
-                }
             }
-          }
+        }
     }
+    
     //Calcular el porcentaje de victorias
     if ($resumenJugador["partidas"] == 0)
     {
