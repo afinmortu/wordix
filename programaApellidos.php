@@ -315,7 +315,7 @@ function opcion5Menu($coleccionDePartidas)
                     break;
                 case 6:
                     $resumenJugador["victorias"] ++;
-                    $resumenJugador["intent6"]++;
+                    $resumenJugador["intento6"]++;
                     break;           
             }
         }
@@ -345,8 +345,40 @@ function opcion5Menu($coleccionDePartidas)
     *********************************************************\n";
 }                                                                  
 
+//******************************************************************
+//******************************************************************
+/**
+ * Funcion de comparacion
+ * @param string $a
+ * @param string $b
+ * @param string $clave
+ * @return string
+ */
+function comparacion($clave)
+{
+    //function build_sorter($clave) {
+        return function ($a, $b) use ($clave) 
+        {
+            return strnatcmp($a[$clave], $b[$clave]);
+        }; 
+}
+//******************************************************************
+//******************************************************************
+/**
+ * Opcion 6 del menu: ordena las partidas por jugador y por palabra
+ * @param array $coleccionDePartidas
+ */
+function opcion6Menu($coleccionDePartidas)
+{
+    //array copiaDePartidas[]
+    $copiaDePartidas[] = $coleccionDePartidas;
+    uasort($copiaDePartidas, comparacion("jugador"));
+    print_r($copiaDePartidas);
+}
 
-//***************************************************************** */
+
+//******************************************************************
+//****************************************************************** 
 /**
  * Visualiza el menu de opciones en la pantalla, le solicita al usuario una opcion
  * valida, si la opcion no es valida vuelve a pedirla. Retorna el numero de la opcion
@@ -481,12 +513,14 @@ $opcion = seleccionarOpcion();
             break;
         case 6:
             //completar qué secuencia de pasos ejecutar si el usuario elige la opción 3
+            opcion6Menu($partidasGuardadas);
             echo "\nPresione una tecla para ir al menu...";
             $opcion = trim(fgets(STDIN));
             break;
         case 7:
-             //Agregamos una nueva palabra a la coleccion.
-              array_push($palabras, (agregarPalabra($palabras))); 
+            //Agregamos una nueva palabra a la coleccion.
+            array_push($palabras, (agregarPalabra($palabras))); 
+            echo "Se agregó una palabra a la lista\n";
             echo "\nPresione una tecla para ir al menu...";
             $opcion = trim(fgets(STDIN));
              break;
