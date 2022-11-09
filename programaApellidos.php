@@ -354,13 +354,13 @@ function opcion5Menu($coleccionDePartidas)
  * @param string $clave
  * @return string
  */
-function comparacion($clave)
+function compJuga($a, $b)
 {
-    //function build_sorter($clave) {
-        return function ($a, $b) use ($clave) 
-        {
-            return strnatcmp($a[$clave], $b[$clave]);
-        }; 
+    return strcmp($a["jugador"],$b["Jugador"]);
+}
+function compPala($a, $b)
+{
+    return strcmp($a["palabraWordix"],$b["palabraWordix"]);
 }
 //******************************************************************
 //******************************************************************
@@ -373,17 +373,22 @@ function opcion6Menu($coleccionDePartidas)
     /*
         array copiaDePartidas[]
         int $indice
+        int $valor
     */
+
     uasort ( $coleccionDePartidas , function ($a, $b) {return strcmp($a["palabraWordix"],$b["palabraWordix"]); });
     uasort ( $coleccionDePartidas , function ($a, $b) {return strcmp($a["jugador"],$b["jugador"]);});
-    print_r($coleccionDePartidas);
-    echo "Jugador       Palabra         Intentos            Puntaje";
-  /*En proceso no romper
-    foreach ($coleccioDePartidas as $indice => $dato) {
-        
-        echo $dato;
+ //   print_r($coleccionDePartidas);
+    echo "\nPartidas ordenadas por Jugador y luego por palabra: \n
+Jugador     Palabra     Intentos     Puntaje\n";
 
-    } */
+        foreach ($coleccionDePartidas as $indice => $valor) 
+        {
+            echo $coleccionDePartidas[$indice]["jugador"]."        ";
+            echo $coleccionDePartidas[$indice]["palabraWordix"]."         ";
+            echo $coleccionDePartidas[$indice]["intentos"]."            ";
+            echo $coleccionDePartidas[$indice]["puntaje"]."\n";
+        } 
 }
 
 
