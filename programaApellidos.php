@@ -370,10 +370,20 @@ function comparacion($clave)
  */
 function opcion6Menu($coleccionDePartidas)
 {
-    //array copiaDePartidas[]
-    $copiaDePartidas[] = $coleccionDePartidas;
-    uasort($copiaDePartidas, comparacion("jugador"));
-    print_r($copiaDePartidas);
+    /*
+        array copiaDePartidas[]
+        int $indice
+    */
+    uasort ( $coleccionDePartidas , function ($a, $b) {return strcmp($a["palabraWordix"],$b["palabraWordix"]); });
+    uasort ( $coleccionDePartidas , function ($a, $b) {return strcmp($a["jugador"],$b["jugador"]);});
+    print_r($coleccionDePartidas);
+    echo "Jugador       Palabra         Intentos            Puntaje";
+  /*En proceso no romper
+    foreach ($coleccioDePartidas as $indice => $dato) {
+        
+        echo $dato;
+
+    } */
 }
 
 
