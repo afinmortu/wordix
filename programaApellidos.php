@@ -442,10 +442,12 @@ function agregarPalabra($coleccionPalabras): string
 */
 function solicitarJugador(): string
 {
-  do {
+  do 
+  {
     echo "Ingrese el nombre del jugador:  ";
     $nombre = trim(fgets(STDIN));
-  } while (is_numeric($nombre[0])); //Si el primer caracter es numerico, lo pide de vuelta
+
+  } while ($nombre == "" || !ctype_alpha($nombre[0])); //Si el primer caracter es numerico, lo pide de vuelta
   return strtolower($nombre); //lo retorna en minusculas
 }
 
