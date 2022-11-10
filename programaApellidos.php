@@ -72,10 +72,11 @@ function resumenPartida($numPartida, $colPartidas)
 {
 
     echo "***********************************"."\n";
-    echo "Partida Wordix ". $numPartida. ": palabra ". $colPartidas[$numPartida-1]["palabraWordix"]."\n";
+    echo "Partida Wordix ". $numPartida. "\n";
+    echo "Palabra: ". $colPartidas[$numPartida-1]["palabraWordix"]."\n";
     echo "Jugador: ". $colPartidas[$numPartida-1]["jugador"]."\n";
     echo "Puntaje: ". $colPartidas[$numPartida-1]["puntaje"]. " puntos."."\n";
-    if ($colPartidas[$numPartida-1]["puntaje"] = 0) 
+    if ($colPartidas[$numPartida-1]["puntaje"] == 0) 
     {
         echo "No adivinó la palabra."."\n";
     }else
@@ -135,30 +136,32 @@ function opcion1y2Menu($partidasAnteriores, $palabrasWordix, $opcion)
   $cantPalabras = count($palabrasWordix);
   $jugadorActual = solicitarJugador();
   $indice = 0;
-  do {
-
+  do 
+  {
     if ($opcion) //Si el modulo fue instanciado con $opcion=true, entonces el jugador elige la palabra...
     {
-      echo "Ingrese un numero de palabra para jugar!: ";
-      $nroPalabraActual = solicitarNumeroEntre(1, $cantPalabras);
-    } else {    //Si el modulo fue instanciado con $opcion=false, entonces nroPalabra es un numero entre 0 y la cantidad de palabras totales...
-      $nroPalabraActual = rand(1, $cantPalabras);
+        echo "Ingrese un numero de palabra para jugar!: ";
+        $nroPalabraActual = solicitarNumeroEntre(1, $cantPalabras);
+    } else 
+    {   //Si el modulo fue instanciado con $opcion=false, entonces nroPalabra es un numero entre 0 y la cantidad de palabras totales...
+        $nroPalabraActual = rand(1, $cantPalabras);
     }
-
     //Una vez almacenado el valor del nroPalabra, se le asigna esta a la variable string $palabraActual
     $palabraActual = $palabrasWordix[$nroPalabraActual - 1];
 
-    do { //Buscamos si el jugador ya jugo con la palabra elegida, recorriendo el arreglo hasta que encuentre la palabra usada, si no la encontro, $palabraUsada se mantiene false.
-      if (($partidasAnteriores[$indice]["jugador"] == $jugadorActual) && ($partidasAnteriores[$indice]["palabraWordix"] == $palabraActual)) {
-        echo $partidasAnteriores[$indice]["jugador"];
-        echo "putito";
-        $palabraUsada = true;
-      } else {
-        $palabraUsada = false;
-        $indice++;
-      }
+    do 
+    { //Buscamos si el jugador ya jugo con la palabra elegida, recorriendo el arreglo hasta que encuentre la palabra usada, si no la encontro, $palabraUsada se mantiene false.
+        if (($partidasAnteriores[$indice]["jugador"] == $jugadorActual) && ($partidasAnteriores[$indice]["palabraWordix"] == $palabraActual)) 
+        {
+            echo $partidasAnteriores[$indice]["jugador"];
+            echo "  ya jugaste esta palabra. Elegi otra. \n";
+            $palabraUsada = true;
+        } else 
+        {
+            $palabraUsada = false;
+            $indice++;
+        }
     } while (!$palabraUsada && $indice < $limite); //El bucle do se ejecutara siempre que la palabra elegida no haya sido encontrada y mientras que $indice sea menor a $limite
-    echo "Ya jugaste esta palabra.";
   } while ($palabraUsada); //El bucle do se ejecutara siempre que la palabra elegida haya sido usada
 
   return jugarWordix($palabraActual, $jugadorActual);
@@ -344,24 +347,6 @@ function opcion5Menu($coleccionDePartidas)
           Intento 6: ". $resumenJugador["intento6"]."\n
     *********************************************************\n";
 }                                                                  
-
-//******************************************************************
-//******************************************************************
-/**
- * Funcion de comparacion
- * @param string $a
- * @param string $b
- * @param string $clave
- * @return string
- */
-function compJuga($a, $b)
-{
-    return strcmp($a["jugador"],$b["Jugador"]);
-}
-function compPala($a, $b)
-{
-    return strcmp($a["palabraWordix"],$b["palabraWordix"]);
-}
 //******************************************************************
 //******************************************************************
 /**
@@ -378,7 +363,6 @@ function opcion6Menu($coleccionDePartidas)
 
     uasort ( $coleccionDePartidas , function ($a, $b) {return strcmp($a["palabraWordix"],$b["palabraWordix"]); });
     uasort ( $coleccionDePartidas , function ($a, $b) {return strcmp($a["jugador"],$b["jugador"]);});
- //   print_r($coleccionDePartidas);
     echo "\nPartidas ordenadas por Jugador y luego por palabra: \n
 Jugador     Palabra     Intentos     Puntaje\n";
 
