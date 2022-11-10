@@ -28,7 +28,8 @@ function cargarColeccionPalabras()
         "MUJER", "QUESO", "FUEGO", "CASAS", "RASGO",
         "GATOS", "GOTAS", "HUEVO", "TINTO", "NAVES",
         "VERDE", "MELON", "YUYOS", "PIANO", "PISOS",
-        "LOCOS", "GANAR", "MONOS", "REINO", "FAROL"
+        "LOCOS", "GANAR", "MONOS", "REINO", "FAROL",
+        "LETRA", "LOCRO", "MATIZ", "SALTO", "TRAPO"
     ];
 
     return ($coleccionPalabras);
@@ -468,11 +469,9 @@ $palabras = cargarColeccionPalabras();      //Carga el array con las palabras gu
 
 
 //Proceso:
-
-//$partida = jugarWordix("MELON", strtolower("MaJo"));
-//print_r($partida);
-//imprimirResultado($partida);
-
+/*El ciclo do..while repite el menu, al elegir una opcion, esta se ejecuta y luego vuelve al menu
+para seleccionar otra opcion. La opcion 8 (la ultima) rompe el ciclo while
+ */
 
 do{
 $opcion = seleccionarOpcion();
@@ -511,7 +510,7 @@ $opcion = seleccionarOpcion();
             $opcion = trim(fgets(STDIN));
             break;
         case 6:
-            //completar qué secuencia de pasos ejecutar si el usuario elige la opción 3
+            //Muestra las partidas ordenadas por jugador y por palabra
             opcion6Menu($partidasGuardadas);
             echo "\nPresione una tecla para ir al menu...";
             $opcion = trim(fgets(STDIN));
@@ -525,7 +524,7 @@ $opcion = seleccionarOpcion();
              break;
         case 8:
             //completar qué secuencia de pasos ejecutar si el usuario elige la opción 3
-            echo "\nGracias por jugar wordix...";
+            echo "\nGracias por jugar wordix...\n";
             break; 
     }
 } while ($opcion != 8);
