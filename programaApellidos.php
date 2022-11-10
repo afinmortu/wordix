@@ -52,9 +52,9 @@ function cargarPartidas ()
     $coleccionPartidas[1] = ["palabraWordix"=>"CASAS","jugador"=>"tito","intentos"=>5,"puntaje"=>12];
     $coleccionPartidas[2] = ["palabraWordix"=>"QUESO","jugador"=>"pepe","intentos"=>4,"puntaje"=>12];
     $coleccionPartidas[3] = ["palabraWordix"=>"TINTO","jugador"=>"atilio","intentos"=>3,"puntaje"=>15];
-    $coleccionPartidas[4] = ["palabraWordix"=>"MUJER","jugador"=>"chino21","intentos"=>5,"puntaje"=>17];
+    $coleccionPartidas[4] = ["palabraWordix"=>"MUJER","jugador"=>"chino21","intentos"=>0,"puntaje"=>0];
     $coleccionPartidas[5] = ["palabraWordix"=>"GOTAS","jugador"=>"marx","intentos"=>2,"puntaje"=>15];
-    $coleccionPartidas[6] = ["palabraWordix"=>"REINO","jugador"=>"chino21","intentos"=>0,"puntaje"=>0];
+    $coleccionPartidas[6] = ["palabraWordix"=>"REINO","jugador"=>"chino21","intentos"=>1,"puntaje"=>16];
     $coleccionPartidas[7] = ["palabraWordix"=>"GANAR","jugador"=>"pinky","intentos"=>4,"puntaje"=>13];
     $coleccionPartidas[8] = ["palabraWordix"=>"MELON","jugador"=>"atilio","intentos"=>5,"puntaje"=>11];
     $coleccionPartidas[9] = ["palabraWordix"=>"VERDE","jugador"=>"atilio","intentos"=>2,"puntaje"=>15];
@@ -215,21 +215,22 @@ function opcion4Menu($coleccionDePartidas)
       $i = 0;
       do
       {
-          if ($jugador == $coleccionDePartidas[$i]["jugador"])
-          {
-              $esJugador = true;
-          }
+        if (($jugador == $coleccionDePartidas[$i]["jugador"]) && ($coleccionDePartidas[$i]["puntaje"] != 0))
+        {
+                $esJugador = true;
+        }
           $i++;
       }while (!$esJugador && $i<$cantPart);
       if (!$esJugador)
       {
-          echo "El jugador no existe...";
-          $resumenJugador["jugador"] = solicitarJugador();
+          echo "El jugador no existe o todavia no gano...";
+          $jugador = solicitarJugador();
       }
   }while (!$esJugador);
   //El jugador existe en la estructura de partidas
   //la variable indice $i guarda el numero de la partida
   //caso de no existir partida? o jugador?
+  $resumenJugador["jugador"] = $jugador;
   resumenPartida($i, $coleccionDePartidas);
 }
 
@@ -397,8 +398,8 @@ function seleccionarOpcion()
     5) Mostrar resumen de Jugador\n
     6) Mostrar listado de partidas ordenadas por jugador y por palabra\n
     7) Agregar una palabra de 5 letras a Wordix\n
-    8) Salir\n
-       Ingrese una opción del menú: ";
+    8) Salir\n";
+    escribirVerde("    Ingrese una opción del menú: ");
     $opcionMenu = solicitarNumeroEntre(1,8);
     return $opcionMenu;
 }
@@ -528,6 +529,9 @@ $opcion = seleccionarOpcion();
             //completar qué secuencia de pasos ejecutar si el usuario elige la opción 3
             echo "\nGracias por jugar wordix...\n";
             break; 
+        default:
+            //Opcion si no se reconoce la opcion :)
+            escribirRojo("Ingrese un numero entero entre 1 y 8");    
     }
 } while ($opcion != 8);
 
