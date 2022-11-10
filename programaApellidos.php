@@ -369,9 +369,9 @@ Jugador     Palabra     Intentos     Puntaje\n";
 
         foreach ($coleccionDePartidas as $indice => $valor) 
         {
-            echo $coleccionDePartidas[$indice]["jugador"]."        ";
-            echo $coleccionDePartidas[$indice]["palabraWordix"]."         ";
-            echo $coleccionDePartidas[$indice]["intentos"]."            ";
+            echo $coleccionDePartidas[$indice]["jugador"]."\t     ";
+            echo $coleccionDePartidas[$indice]["palabraWordix"]."\t    ";
+            echo $coleccionDePartidas[$indice]["intentos"]."\t        ";
             echo $coleccionDePartidas[$indice]["puntaje"]."\n";
         } 
 }
