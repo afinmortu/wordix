@@ -45,19 +45,19 @@ function cargarPartidas ()
     /*
     array $coleccion
     */
-$coleccion = [];
-$pa1 = ["palabraWordix" => "SUECO", "jugador" => "kleiton", "intentos" => 0, "puntaje" => 0];
-$pa2 = ["palabraWordix" => "YUYOS", "jugador" => "briba", "intentos" => 0, "puntaje" => 0];
-$pa3 = ["palabraWordix" => "HUEVO", "jugador" => "zrack", "intentos" => 3, "puntaje" => 9];
-$pa4 = ["palabraWordix" => "TINTO", "jugador" => "cabrito", "intentos" => 4, "puntaje" => 8];
-$pa5 = ["palabraWordix" => "RASGO", "jugador" => "briba", "intentos" => 0, "puntaje" => 0];
-$pa6 = ["palabraWordix" => "VERDE", "jugador" => "cabrito", "intentos" => 5, "puntaje" => 7];
-$pa7 = ["palabraWordix" => "CASAS", "jugador" => "kleiton", "intentos" => 5, "puntaje" => 7];
-$pa8 = ["palabraWordix" => "GOTAS", "jugador" => "kleiton", "intentos" => 0, "puntaje" => 0];
-$pa9 = ["palabraWordix" => "ZORRO", "jugador" => "zrack", "intentos" => 4, "puntaje" => 8];
-$pa10 = ["palabraWordix" => "GOTAS", "jugador" => "cabrito", "intentos" => 0, "puntaje" => 0];
-$pa11 = ["palabraWordix" => "FUEGO", "jugador" => "cabrito", "intentos" => 2, "puntaje" => 10];
-$pa12 = ["palabraWordix" => "TINTO", "jugador" => "briba", "intentos" => 0, "puntaje" => 0];
+    $coleccion = [];
+    $pa1 = ["palabraWordix" => "SUECO", "jugador" => "kleiton", "intentos" => 0, "puntaje" => 0];
+    $pa2 = ["palabraWordix" => "YUYOS", "jugador" => "briba", "intentos" => 0, "puntaje" => 0];
+    $pa3 = ["palabraWordix" => "HUEVO", "jugador" => "zrack", "intentos" => 3, "puntaje" => 9];
+    $pa4 = ["palabraWordix" => "TINTO", "jugador" => "cabrito", "intentos" => 4, "puntaje" => 8];
+    $pa5 = ["palabraWordix" => "RASGO", "jugador" => "briba", "intentos" => 0, "puntaje" => 0];
+    $pa6 = ["palabraWordix" => "VERDE", "jugador" => "cabrito", "intentos" => 5, "puntaje" => 7];
+    $pa7 = ["palabraWordix" => "CASAS", "jugador" => "kleiton", "intentos" => 5, "puntaje" => 7];
+    $pa8 = ["palabraWordix" => "GOTAS", "jugador" => "kleiton", "intentos" => 0, "puntaje" => 0];
+    $pa9 = ["palabraWordix" => "ZORRO", "jugador" => "zrack", "intentos" => 4, "puntaje" => 8];
+    $pa10 = ["palabraWordix" => "GOTAS", "jugador" => "cabrito", "intentos" => 0, "puntaje" => 0];
+    $pa11 = ["palabraWordix" => "FUEGO", "jugador" => "cabrito", "intentos" => 2, "puntaje" => 10];
+    $pa12 = ["palabraWordix" => "TINTO", "jugador" => "briba", "intentos" => 0, "puntaje" => 0];
 
 array_push($coleccion, $pa1, $pa2, $pa3, $pa4, $pa5, $pa6, $pa7, $pa8, $pa9, $pa10, $pa11, $pa12);
 return $coleccion;
@@ -143,8 +143,9 @@ function opcion1y2Menu($partidasAnteriores, $palabrasWordix, $opcion)
   {
     if ($opcion) //Si el modulo fue instanciado con $opcion=true, entonces el jugador elige la palabra...
     {
-        echo "Ingrese un numero de palabra para jugar!: ";
+        echo "Ingrese un numero de palabra para jugar!!... 0 salir al menu ";
         $nroPalabraActual = solicitarNumeroEntre(1, $cantPalabras);
+        if ($nroPalabraActual == 0){return;}
     } else 
     {   //Si el modulo fue instanciado con $opcion=false, entonces nroPalabra es un numero entre 0 y la cantidad de palabras totales...
         $nroPalabraActual = rand(1, $cantPalabras);
@@ -164,7 +165,7 @@ function opcion1y2Menu($partidasAnteriores, $palabrasWordix, $opcion)
             $palabraUsada = false;
             $indice++;
         }
-    } while (!$palabraUsada && $indice < $limite); //El bucle do se ejecutara siempre que la palabra elegida no haya sido encontrada y mientras que $indice sea menor a $limite
+    } while (!$palabraUsada && $indice < $limite-1); //El bucle do se ejecutara siempre que la palabra elegida no haya sido encontrada y mientras que $indice sea menor a $limite
   } while ($palabraUsada); //El bucle do se ejecutara siempre que la palabra elegida haya sido usada
 
   return jugarWordix($palabraActual, $jugadorActual);
@@ -189,6 +190,7 @@ function opcion3Menu($colecPartidas)
     $cantPartidas = count($colecPartidas);
     echo "Ingrese un número de partida: ";
     $numPart = (solicitarNumeroEntre(1, $cantPartidas)) ;
+    if ($numPart == 0){return;}
     resumenPartida($numPart, $colecPartidas);
 }
 
@@ -225,8 +227,9 @@ function opcion4Menu($coleccionDePartidas)
       }while (!$esJugador && $i<$cantPart);
       if (!$esJugador)
       {
-          echo "El jugador no existe o todavia no gano...";
+          echo "El jugador no existe o todavia no gano...Ingresa m para volver al menu... \n";
           $jugador = solicitarJugador();
+          if ($jugador == "m"){return;}
       }
   }while (!$esJugador);
   //El jugador existe en la estructura de partidas
@@ -275,31 +278,15 @@ function opcion5Menu($coleccionDePartidas)
     //Primero se verifica si el jugador ingresado existe en la estructura de jugadas
     do
     {
-        $i = 0;
-        do
-        {
+        for ($i=0; $i < $cantPart ; $i++) 
+        { 
             if ($resumenJugador["jugador"] == $coleccionDePartidas[$i]["jugador"])
             {
                 $esJugador = true;
-            }
-            $i++;
-        }while (!$esJugador && $i<$cantPart);
-        if (!$esJugador)
-        {
-            echo "El jugador no existe...";
-            $resumenJugador["jugador"] = solicitarJugador();
-        }
-    }while (!$esJugador);
-    //el jugador existe en la lista de jugadas
-    //ahora realizamos la estadistica
-    for ($i=0; $i < $cantPart ; $i++) 
-    { 
-        if ($resumenJugador["jugador"] == $coleccionDePartidas[$i]["jugador"])
-        {
-            $resumenJugador["partidas"]++;
-            $resumenJugador["puntaje"] = $resumenJugador["puntaje"] + $coleccionDePartidas[$i]["puntaje"];
-            switch ($coleccionDePartidas[$i]["intentos"]) 
-            {
+                $resumenJugador["partidas"]++;
+                $resumenJugador["puntaje"] = $resumenJugador["puntaje"] + $coleccionDePartidas[$i]["puntaje"];
+                switch ($coleccionDePartidas[$i]["intentos"]) 
+                {
                 case 1:
                     $resumenJugador["victorias"] ++;
                     $resumenJugador["intento1"]++;
@@ -324,9 +311,16 @@ function opcion5Menu($coleccionDePartidas)
                     $resumenJugador["victorias"] ++;
                     $resumenJugador["intento6"]++;
                     break;           
+                }
             }
         }
-    }
+        if (!$esJugador)
+        {
+            echo "El jugador no existe...Ingresa m para volver al menu... \n";
+            $resumenJugador["jugador"] = solicitarJugador();
+            if ($resumenJugador["jugador"] == "m"){return;}
+        }    
+    }while (!$esJugador);
     
     //Calcular el porcentaje de victorias
     if ($resumenJugador["partidas"] == 0)
@@ -411,10 +405,10 @@ function seleccionarOpcion()
 * Dada la coleccion de palabras, la funcion pide y agrega una palabra al array $palabras
 * y retorna la palabra en mayusculas
 * @param array $coleccionPalabras
-* @return string
+* @return array
 */
 
-function agregarPalabra($coleccionPalabras): string
+function agregarPalabra($coleccionPalabras)
 {
   /*string $palabra;
   int $indice=0;
@@ -423,9 +417,9 @@ function agregarPalabra($coleccionPalabras): string
   $indice = 0;
   $palabraExiste = false;
   $cantPalabras = count($coleccionPalabras);
-  
-  do {
-    $palabra = leerPalabra5letras();
+  $palabra = leerPalabra5letras();
+  do 
+  {
     if ($coleccionPalabras[$indice] == $palabra) { //Chequeamos que la palabra no este en la coleccion de palabras original
       $palabraExiste = true;
     } else {
@@ -434,7 +428,14 @@ function agregarPalabra($coleccionPalabras): string
     }
   } while (!$palabraExiste && $indice > $cantPalabras);
   //Retornamos la palabra en mayusculas
-  return strtoupper($palabra);
+  if ($palabraExiste)
+  {
+    array_push($coleccionPalabras, $palabra); 
+    echo "Se agregó una palabra a la lista\n".$palabra;
+  }else{
+    echo "La palabra ya existe en la lista...\n".$palabra;
+  }
+  return $coleccionPalabras;
 }
 /****************************************************************** */
 /**
@@ -522,8 +523,7 @@ $opcion = seleccionarOpcion();
             break;
         case 7:
             //Agregamos una nueva palabra a la coleccion.
-            array_push($palabras, (agregarPalabra($palabras))); 
-            echo "Se agregó una palabra a la lista\n";
+            $palabras = agregarPalabra($palabras); 
             echo "\nPresione una tecla para ir al menu...";
             $opcion = trim(fgets(STDIN));
              break;

@@ -38,6 +38,7 @@ function solicitarNumeroEntre($min, $max)
     while (!is_int($numero) && !($numero >= $min && $numero <= $max)) {
         echo "Debe ingresar un número entre " . $min . " y " . $max . ": ";
         $numero = trim(fgets(STDIN));
+        if ($numero == 0){return 0;}
     }
     return $numero;
 }
