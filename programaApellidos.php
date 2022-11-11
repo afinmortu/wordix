@@ -106,7 +106,7 @@ function listadoJugadores($colDePartidas)
     echo "       Lista de jugadores guardados: \n";
     foreach ($colDePartidas as $i => $partidas) 
     {
-        echo "     ".$partidas["jugador"]."\n";
+        echo "\t".$colDePartidas[$i]["jugador"]."\n";
         //$listaJugadores[$i] = $partidas["jugador"];
     }
 }
@@ -143,7 +143,7 @@ function opcion1y2Menu($partidasAnteriores, $palabrasWordix, $opcion)
   {
     if ($opcion) //Si el modulo fue instanciado con $opcion=true, entonces el jugador elige la palabra...
     {
-        echo "Ingrese un numero de palabra para jugar!!... 0 salir al menu ";
+        echo "Ingrese un numero de palabra para jugar!!...\nPresione 0 para salir al menu ";
         $nroPalabraActual = solicitarNumeroEntre(1, $cantPalabras);
         if ($nroPalabraActual == 0){return;}
     } else 
@@ -227,7 +227,7 @@ function opcion4Menu($coleccionDePartidas)
       }while (!$esJugador && $i<$cantPart);
       if (!$esJugador)
       {
-          echo "El jugador no existe o todavia no gano...Ingresa m para volver al menu... \n";
+          echo "El jugador no existe o todavia no gano...\nIngresa m para volver al menu... \n";
           $jugador = solicitarJugador();
           if ($jugador == "m"){return;}
       }
@@ -316,7 +316,7 @@ function opcion5Menu($coleccionDePartidas)
         }
         if (!$esJugador)
         {
-            echo "El jugador no existe...Ingresa m para volver al menu... \n";
+            echo "El jugador no existe...\nIngresa m para volver al menu... \n";
             $resumenJugador["jugador"] = solicitarJugador();
             if ($resumenJugador["jugador"] == "m"){return;}
         }    
@@ -419,7 +419,7 @@ function agregarPalabra($coleccionPalabras)
   $cantPalabras = count($coleccionPalabras);
   $palabra = leerPalabra5letras();
   do 
-  {
+  { 
     if ($coleccionPalabras[$indice] == $palabra) { //Chequeamos que la palabra no este en la coleccion de palabras original
       $palabraExiste = true;
     } else {
@@ -427,13 +427,13 @@ function agregarPalabra($coleccionPalabras)
       $indice++;
     }
   } while (!$palabraExiste && $indice > $cantPalabras);
-  //Retornamos la palabra en mayusculas
-  if ($palabraExiste)
+  //evalua si la palabra existe, falso, guarda la palabra en el array
+  if (!$palabraExiste)
   {
     array_push($coleccionPalabras, $palabra); 
-    echo "Se agregó una palabra a la lista\n".$palabra;
+    echo "Se agregó una palabra a la lista\n";
   }else{
-    echo "La palabra ya existe en la lista...\n".$palabra;
+    echo "La palabra ya existe en la lista...\n";
   }
   return $coleccionPalabras;
 }
