@@ -358,9 +358,24 @@ function opcion6Menu($coleccionDePartidas)
         int $indice
         int $valor
     */
+    function com($a, $b)
+    {
+        $inNom = "jugador";
+        $inPa = "palabraWordix";
 
-    uasort ( $coleccionDePartidas , function ($a, $b) {return strcmp($a["palabraWordix"],$b["palabraWordix"]); });
-    uasort ( $coleccionDePartidas , function ($a, $b) {return strcmp($a["jugador"],$b["jugador"]);});
+        if ($a[$inNom] == $b[$inNom]){
+            if ($a[$inPa] < $b[$inPa]){
+                return -1;
+            }else{
+                return 1;
+            }
+        }else if ($a[$inNom] < $b[$inNom]){
+            return -1;
+        }else{
+            return 1;  
+        }
+    }
+    uasort ($coleccionDePartidas, 'com');
     echo "\nPartidas ordenadas por Jugador y luego por palabra: \n
 Jugador          Palabra            Intentos     Puntaje\n";
 
