@@ -143,7 +143,7 @@ function opcion1y2Menu($partidasAnteriores, $palabrasWordix, $opcion)
   {
     if ($opcion) //Si el modulo fue instanciado con $opcion=true, entonces el jugador elige la palabra...
     {
-        echo "Ingrese un numero de palabra para jugar!!...\nPresione 0 para salir al menu ";
+        echo "\nIngrese un numero de palabra para jugar!!...\nPresione 0 para salir al menu ";
         $nroPalabraActual = solicitarNumeroEntre(1, $cantPalabras);
         if ($nroPalabraActual == 0){return;}
     } else 
@@ -227,7 +227,7 @@ function opcion4Menu($coleccionDePartidas)
       }while (!$esJugador && $i<$cantPart);
       if (!$esJugador)
       {
-          echo "El jugador no existe o todavia no gano...\nIngresa m para volver al menu... \n";
+          echo "\nEl jugador no existe o todavia no gano...\nIngresa m para volver al menu... \n\n";
           $jugador = solicitarJugador();
           if ($jugador == "m"){return;}
       }
@@ -316,7 +316,7 @@ function opcion5Menu($coleccionDePartidas)
         }
         if (!$esJugador)
         {
-            echo "El jugador no existe...\nIngresa m para volver al menu... \n";
+            echo "\nEl jugador no existe...\nIngresa m para volver al menu... \n\n";
             $resumenJugador["jugador"] = solicitarJugador();
             if ($resumenJugador["jugador"] == "m"){return;}
         }    
@@ -346,35 +346,46 @@ function opcion5Menu($coleccionDePartidas)
     *********************************************************\n";
 }                                                                  
 //******************************************************************
+/**
+ * funcion de comparacion para ordenar el array de partidas,
+ *  ordena por jugador y si esta repetido por palabra wordix
+ * @param string $a
+ * @param string $b
+ * @return int
+ */
+function com($a,$b)
+{
+    /* 
+    string $ordenUno
+    string ordenDos
+    */
+    $ordenUno = "jugador";
+    $ordenDos = "palabraWordix";
+    if ($a[$ordenUno] == $b[$ordenUno]){
+        if ($a[$ordenDos] < $b[$ordenDos]){
+            return -1;
+        }else{
+            return 1;
+        }
+    }else if ($a[$ordenUno] < $b[$ordenUno]){
+        return -1;
+    }else{
+        return 1;  
+    }
+}
 //******************************************************************
 /**
  * Opcion 6 del menu: ordena las partidas por jugador y por palabra
  * @param array $coleccionDePartidas
  */
 function opcion6Menu($coleccionDePartidas)
-{
+{ 
     /*
         array copiaDePartidas[]
         int $indice
         int $valor
     */
-    function com($a, $b)
-    {
-        $inNom = "jugador";
-        $inPa = "palabraWordix";
 
-        if ($a[$inNom] == $b[$inNom]){
-            if ($a[$inPa] < $b[$inPa]){
-                return -1;
-            }else{
-                return 1;
-            }
-        }else if ($a[$inNom] < $b[$inNom]){
-            return -1;
-        }else{
-            return 1;  
-        }
-    }
     uasort ($coleccionDePartidas, 'com');
     echo "\nPartidas ordenadas por Jugador y luego por palabra: \n
 Jugador          Palabra            Intentos     Puntaje\n";
@@ -409,7 +420,7 @@ function seleccionarOpcion()
     5) Mostrar resumen de Jugador\n
     6) Mostrar listado de partidas ordenadas por jugador y por palabra\n
     7) Agregar una palabra de 5 letras a Wordix\n
-    8) Salir\n";
+    8) Salir\n\n";
     escribirVerde("    Ingrese una opción del menú: ");
     $opcionMenu = solicitarNumeroEntre(1,8);
     return $opcionMenu;
@@ -463,7 +474,7 @@ function solicitarJugador(): string
 {
   do 
   {
-    echo "Ingrese el nombre del jugador:  ";
+    echo "\nIngrese el nombre del jugador:  ";
     $nombre = trim(fgets(STDIN));
 
   } while ($nombre == "" || !ctype_alpha($nombre[0])); //Si el primer caracter es numerico, lo pide de vuelta
